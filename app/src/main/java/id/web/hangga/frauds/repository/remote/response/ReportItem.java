@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
+import id.web.hangga.frauds.model.Report;
+
 public class ReportItem {
     @SerializedName("id")
     @Expose
@@ -24,4 +26,15 @@ public class ReportItem {
     @SerializedName("no_rek")
     @Expose
     private boolean no_rek;
+
+    public Report toReportparcel(){
+        Report report = new Report();
+        report.setId(id);
+        report.setCreatedAt(createdAt);
+        report.setUpdatedAt(updatedAt);
+        report.setNumber(number);
+        report.setNo_rek(no_rek);
+        report.setNo_telp(no_telp);
+        return report;
+    }
 }

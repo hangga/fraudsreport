@@ -27,4 +27,16 @@ public class Frauds {
     @SerializedName("kota_korban")
     @Expose
     private String kota_korban;
+
+    public id.web.hangga.frauds.model.Frauds toFraudsParcel(){
+        id.web.hangga.frauds.model.Frauds frauds = new id.web.hangga.frauds.model.Frauds();
+        frauds.setId(id);
+        frauds.setReportId(reportId);
+        frauds.setCreatedAt(createdAt);
+        frauds.setUpdatedAt(updatedAt);
+        frauds.setJenis_penipuan(jenis_penipuan);
+        frauds.setJumlah_kerugian(jumlah_kerugian);
+        frauds.setKota_korban(kota_korban);
+        return frauds;
+    }
 }
