@@ -67,7 +67,7 @@ public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ReportViewHolder) {
-            ((ReportViewHolder) holder).bind(report);
+            ((ReportViewHolder) holder).bind(report, null);
         } else if (holder instanceof FraudViewHolder) {
             ((FraudViewHolder) holder).bind(fraudsList.get(position));
         } else if (holder instanceof FraudSummaryHolder) {

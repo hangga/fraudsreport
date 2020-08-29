@@ -51,9 +51,12 @@
             android:id="@+id/imgMore"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:scaleType="centerInside"
             android:src="@drawable/ic_more_horiz_black_24dp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:background="@drawable/selector_global"
+            android:layout_height="64dp"
+            android:layout_margin="0dp"
+            android:layout_width="40dp"
             tools:text="Stok"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>

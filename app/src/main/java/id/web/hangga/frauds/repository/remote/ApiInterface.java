@@ -99,7 +99,7 @@ public interface ApiInterface {
      * @return
      */
     @DELETE("reports/{id}")
-    Single<Response<Void>> deleteReport(@Path("id") int id);
+    Single<ReportItem> deleteReport(@Path("id") int id);
 
     /**
      * Delete FraudItem

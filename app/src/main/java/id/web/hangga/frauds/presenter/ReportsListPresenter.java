@@ -75,15 +75,15 @@ public class ReportsListPresenter {
         apiInterface.deleteReport(report.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<Void>>() {
+                .subscribe(new SingleObserver<ReportItem>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(Response<Void> voidResponse) {
-                        view.onReportDeleted(true);
+                    public void onSuccess(ReportItem reportItem) {
+                        view.onReportDeleted(reportItem.toReportparcel());
                         view.onProgress(false);
                     }
 
@@ -146,7 +146,7 @@ public class ReportsListPresenter {
 
     public interface View extends BaseView{
         void onReportResult(Report report);
-        void onReportDeleted(boolean isSuccess);
+        void onReportDeleted(Report report);
         void onGetAllDataReport(List<Report> reports, Sumary sumary);
     }
 }

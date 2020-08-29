@@ -19,7 +19,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.web.hangga.frauds.R;
-import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.presenter.ReportsListPresenter;
@@ -94,14 +93,21 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
     }
 
     @Override
-    public void onReportDeleted(boolean isSuccess) {
-
+    public void onReportDeleted(Report report) {
+        showMessage(report.getNumber() + "berhasil dihapus..");
+        //reportListAdapter.remove(report);
     }
 
     @Override
     public void onGetAllDataReport(List<Report> reports, Sumary sumary) {
         reportListAdapter.setReportList(reports);
         reportListAdapter.setSumary(sumary);
+        reportListAdapter.setOnPrepareToDelete(new OnPrepareToDelete() {
+            @Override
+            public void onPrepareToDelete(Report report) {
+                reportsListPresenter.deleteReport(report);
+            }
+        });
         recyclerMain.setAdapter(reportListAdapter);
     }
 

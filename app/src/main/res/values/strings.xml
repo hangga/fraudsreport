@@ -18,4 +18,7 @@
     <string name="summary_rugi">Total kerugian sampai dengan saat ini</string>
     <string name="summary_new_rugi">Kerugian terbaru yang dilaporkan pengguna</string>
     <string name="title_activity_report_detil">ReportDetilActivity</string>
+
+    <string name="update">Ubah</string>
+    <string name="delete">Hapus</string>
 </resources>

@@ -19,6 +19,11 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     private List<Report> reportList = new ArrayList<>();
     private Sumary sumary;
+    private OnPrepareToDelete onPrepareToDelete;
+
+    public void setOnPrepareToDelete(OnPrepareToDelete onPrepareToDelete) {
+        this.onPrepareToDelete = onPrepareToDelete;
+    }
 
     public ReportListAdapter() {
     }
@@ -30,6 +35,11 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public void setReportList(List<Report> reportList) {
         this.reportList = reportList;
+        notifyDataSetChanged();
+    }
+
+    public void remove(Report report){
+        reportList.remove(report);
         notifyDataSetChanged();
     }
 
@@ -54,7 +64,14 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ReportViewHolder) {
-            ((ReportViewHolder) holder).bind(reportList.get(position));
+            ((ReportViewHolder) holder).bind(reportList.get(position), new OnPrepareToDelete() {
+                @Override
+                public void onPrepareToDelete(Report report) {
+                    reportList.remove(report);
+                    notifyDataSetChanged();
+                    onPrepareToDelete.onPrepareToDelete(report);
+                }
+            });
         } else if (holder instanceof ReportSummaryHoder) {
             ((ReportSummaryHoder) holder).bind(sumary.getTotalRek(), sumary.getTotalTelp(), sumary.getTotalKasus());
         }
