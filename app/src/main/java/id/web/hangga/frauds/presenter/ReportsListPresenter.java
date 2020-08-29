@@ -12,6 +12,7 @@ import id.web.hangga.frauds.repository.remote.ApiInterface;
 import id.web.hangga.frauds.repository.remote.RetrofitClient;
 import id.web.hangga.frauds.repository.remote.response.FraudItem;
 import id.web.hangga.frauds.repository.remote.response.ReportItem;
+import id.web.hangga.frauds.util.Prop;
 import id.web.hangga.frauds.view.BaseView;
 import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
@@ -112,7 +113,7 @@ public class ReportsListPresenter {
                         } else {
                             reports = new ArrayList<>();
                             Report summaryItem = new Report();
-                            summaryItem.setType(Report.TYPE_SUMMARY);
+                            summaryItem.setType(Prop.TYPE_SUMMARY);
                             reports.add(0, summaryItem);
 
                             int totalRek = 0;

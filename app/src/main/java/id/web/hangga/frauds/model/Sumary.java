@@ -3,6 +3,8 @@ package id.web.hangga.frauds.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import id.web.hangga.frauds.util.Prop;
+
 public class Sumary extends Report implements Parcelable {
     public static final Parcelable.Creator<Sumary> CREATOR = new Parcelable.Creator<Sumary>() {
         @Override
@@ -21,7 +23,7 @@ public class Sumary extends Report implements Parcelable {
     private Double totalRugi;
     private Double newRugi;
     public Sumary() {
-        this.setType(Report.TYPE_SUMMARY);
+        this.setType(Prop.TYPE_SUMMARY);
     }
     protected Sumary(Parcel in) {
         this.totalKasus = in.readInt();

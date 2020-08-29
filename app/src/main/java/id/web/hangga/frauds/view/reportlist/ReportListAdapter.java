@@ -13,12 +13,10 @@ import java.util.List;
 import id.web.hangga.frauds.R;
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.model.Sumary;
+import id.web.hangga.frauds.util.Prop;
 
 public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int TYPE_SUMMARY = 0;
-    private static final int TYPE_ITEM_REPORT = 1;
-    private static final int TYPE_PAGI = 2;
     private List<Report> reportList = new ArrayList<>();
     private Sumary sumary;
 
@@ -43,10 +41,10 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == TYPE_ITEM_REPORT) {
+        if (viewType == Prop.TYPE_ITEM_REPORT) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_report, parent, false);
             return new ReportViewHolder(itemView);
-        } else if (viewType == TYPE_SUMMARY) {
+        } else if (viewType == Prop.TYPE_SUMMARY) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_summary_report, parent, false);
             return new ReportSummaryHoder(itemView);
         } else

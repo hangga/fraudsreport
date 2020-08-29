@@ -5,10 +5,9 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
+import id.web.hangga.frauds.util.Prop;
+
 public class Frauds extends Report implements Parcelable {
-    public static int TYPE_SUMMARY = 0;
-    public static int TYPE_ITEM_FRAUD = 1;
-    public static int TYPE_PAGI = 2;
     public static final Parcelable.Creator<Frauds> CREATOR = new Parcelable.Creator<Frauds>() {
         @Override
         public Frauds createFromParcel(Parcel source) {
@@ -27,6 +26,7 @@ public class Frauds extends Report implements Parcelable {
     private String kota_korban;
 
     public Frauds() {
+        this.setType(Prop.TYPE_ITEM_FRAUD);
     }
 
     protected Frauds(Parcel in) {

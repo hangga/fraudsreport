@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:textColor="@color/black_flat"
             android:textSize="@dimen/size_title_item"
-            android:text="@string/summary_norek"/>
+            android:text="@string/summary_kasus"/>
         <View
 
             android:layout_marginTop="@dimen/padding_card_inner"

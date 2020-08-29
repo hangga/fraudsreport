@@ -9,6 +9,7 @@ import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.repository.remote.ApiInterface;
 import id.web.hangga.frauds.repository.remote.RetrofitClient;
 import id.web.hangga.frauds.repository.remote.response.FraudItem;
+import id.web.hangga.frauds.util.Prop;
 import id.web.hangga.frauds.view.BaseView;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -40,27 +41,27 @@ public class ReportDetilPresenter {
 
                     @Override
                     public void onNext(List<FraudItem> fraudItems) {
-                        if (fraudItems.size() == 0){
-                            view.onEmpty();
-                        } else {
-                            frauds = new ArrayList<>();
-                            Frauds summaryItem = new Frauds();
-                            summaryItem.setType(Frauds.TYPE_SUMMARY);
-                            frauds.add(0, summaryItem);
-                            Double totalRugi = 0.0;
-                            Double newRugi = 0.0;
-                            for (int i = 0; i < fraudItems.size(); i++) {
-                                Frauds fraud = fraudItems.get(i).toFraudsParcel();
-                                frauds.add(1, fraud);
-                                totalRugi = totalRugi + fraud.getJumlah_kerugian();
-                                newRugi = fraud.getJumlah_kerugian();
-                            }
-                            sumary = new Sumary();
-                            sumary.setTotalKasus(fraudItems.size());
-                            sumary.setTotalRugi(totalRugi);
-                            sumary.setNewRugi(newRugi);
-                            view.onReportDetil(frauds, sumary);
+                        frauds = new ArrayList<>();
+                        Frauds summaryItem = new Frauds();
+                        summaryItem.setType(Prop.TYPE_SUMMARY);
+                        frauds.add(0, summaryItem);
+                        Double totalRugi = 0.0;
+                        Double newRugi = 0.0;
+
+                        Frauds reportItem = new Frauds();
+                        reportItem.setType(Prop.TYPE_ITEM_REPORT);
+                        frauds.add(1, reportItem);
+                        for (int i = 0; i < fraudItems.size(); i++) {
+                            Frauds fraud = fraudItems.get(i).toFraudsParcel();
+                            frauds.add(fraud);
+                            totalRugi = totalRugi + fraud.getJumlah_kerugian();
+                            newRugi = fraud.getJumlah_kerugian();
                         }
+                        sumary = new Sumary();
+                        sumary.setTotalKasus(fraudItems.size());
+                        sumary.setTotalRugi(totalRugi);
+                        sumary.setNewRugi(newRugi);
+                        view.onReportDetil(frauds, sumary);
                     }
 
                     @Override

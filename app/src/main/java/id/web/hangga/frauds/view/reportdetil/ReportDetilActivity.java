@@ -97,6 +97,7 @@ public class ReportDetilActivity extends AppCompatActivity implements ReportDeti
     public void onReportDetil(List<Frauds> frauds, Sumary sumary) {
         fraudListAdapter.setFraudsList(frauds);
         fraudListAdapter.setSumary(sumary);
+        fraudListAdapter.setReport(report);
         recyclerMain.setAdapter(fraudListAdapter);
     }
 }

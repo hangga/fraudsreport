@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="4dp"
-    app:cardElevation="2dp"
+    app:cardElevation="1dp"
     android:layout_marginLeft="@dimen/padding_page_normal"
     android:layout_marginRight="@dimen/padding_page_normal"
     android:layout_marginTop="@dimen/margin_card_vertical"
@@ -28,14 +28,14 @@
             android:layout_marginTop="@dimen/padding_card_inner_inner"
             android:layout_centerVertical="true"
             android:layout_marginBottom="@dimen/padding_card_inner_inner"
-            tools:src="@drawable/ic_contact_phone_24dp"
+            tools:src="@mipmap/ic_bank_bg"
             android:scaleType="fitCenter"
-            android:layout_width="20dp"
-            android:layout_height="20dp"/>
+            android:layout_width="38dp"
+            android:layout_height="38dp"/>
 
         <TextView
             android:id="@+id/txtJenis"
-            android:layout_marginLeft="@dimen/padding_card_inner_inner"
+            android:layout_marginLeft="@dimen/padding_page_normal"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/imgIcon"
             android:layout_marginTop="@dimen/padding_card_inner_inner"

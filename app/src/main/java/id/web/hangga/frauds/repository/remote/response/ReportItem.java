@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 
 import id.web.hangga.frauds.model.Report;
+import id.web.hangga.frauds.util.Prop;
 
 public class ReportItem {
     @SerializedName("id")
@@ -35,7 +36,7 @@ public class ReportItem {
         report.setNumber(number);
         report.setNo_rek(no_rek);
         report.setNo_telp(no_telp);
-        report.setType(Report.TYPE_ITEM_REPORT);
+        report.setType(Prop.TYPE_ITEM_REPORT);
         return report;
     }
 }

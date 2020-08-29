@@ -7,6 +7,7 @@ import java.util.Date;
 
 import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;
+import id.web.hangga.frauds.util.Prop;
 
 public class FraudItem {
     @SerializedName("id")
@@ -40,7 +41,7 @@ public class FraudItem {
         frauds.setJenis_penipuan(jenis_penipuan);
         frauds.setJumlah_kerugian(jumlah_kerugian);
         frauds.setKota_korban(kota_korban);
-        frauds.setType(Frauds.TYPE_ITEM_FRAUD);
+        frauds.setType(Prop.TYPE_ITEM_FRAUD);
         return frauds;
     }
 }

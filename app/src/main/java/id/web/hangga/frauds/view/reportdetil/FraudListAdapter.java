@@ -12,14 +12,21 @@ import java.util.List;
 
 import id.web.hangga.frauds.R;
 import id.web.hangga.frauds.model.Frauds;
+import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.model.Sumary;
+import id.web.hangga.frauds.util.Prop;
+import id.web.hangga.frauds.view.reportlist.ReportViewHolder;
 
 public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int TYPE_SUMMARY = 0;
-    private static final int TYPE_ITEM_FRAUD = 1;
-    private static final int TYPE_PAGI = 2;
     private Sumary sumary;
+    private Report report;
+
+    public void setReport(Report report) {
+        this.report = report;
+        notifyDataSetChanged();
+    }
+
     private List<Frauds> fraudsList = new ArrayList<>();
 
     public FraudListAdapter(){}
@@ -42,11 +49,14 @@ public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == TYPE_ITEM_FRAUD) {
+        if (viewType == Prop.TYPE_ITEM_REPORT) {
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_report, parent, false);
+            return new ReportViewHolder(itemView);
+        } else if (viewType == Prop.TYPE_ITEM_FRAUD) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_fraud,
                     parent, false);
             return new FraudViewHolder(itemView);
-        } else if (viewType == TYPE_SUMMARY) {
+        } else if (viewType == Prop.TYPE_SUMMARY) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_summary_fraud,
                     parent, false);
             return new FraudSummaryHolder(itemView);
@@ -56,7 +66,9 @@ public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof FraudViewHolder) {
+        if (holder instanceof ReportViewHolder) {
+            ((ReportViewHolder) holder).bind(report);
+        } else if (holder instanceof FraudViewHolder) {
             ((FraudViewHolder) holder).bind(fraudsList.get(position));
         } else if (holder instanceof FraudSummaryHolder) {
             ((FraudSummaryHolder) holder).bind(sumary.getTotalKasus(),

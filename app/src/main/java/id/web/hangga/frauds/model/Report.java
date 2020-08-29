@@ -5,9 +5,6 @@ import android.os.Parcelable;
 
 
 public class Report implements Parcelable {
-    public static int TYPE_SUMMARY = 0;
-    public static int TYPE_ITEM_REPORT = 1;
-    public static int TYPE_PAGI = 2;
     public static final Parcelable.Creator<Report> CREATOR = new Parcelable.Creator<Report>() {
         @Override
         public Report createFromParcel(Parcel source) {

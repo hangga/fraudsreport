@@ -28,7 +28,7 @@ public class FraudSummaryHolder extends RecyclerView.ViewHolder {
 
     void bind(int totalkasus, Double totalRugi, Double newRugi){
         txtTotalKasus.setText(String.valueOf(totalkasus));
-        txtTotalRugi.setText(df.format(totalRugi));
-        txtNewRugi.setText(df.format(newRugi));
+        txtTotalRugi.setText("Rp."+df.format(totalRugi));
+        txtNewRugi.setText("Rp."+df.format(newRugi));
     }
 }

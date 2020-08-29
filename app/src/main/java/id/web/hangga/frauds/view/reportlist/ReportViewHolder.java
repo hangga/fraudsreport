@@ -22,18 +22,18 @@ public class ReportViewHolder extends RecyclerView.ViewHolder {
     TextView txtNUmber;
     View view;
 
-    ReportViewHolder(@NonNull View itemView) {
+    public ReportViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         this.view = itemView;
     }
 
-    void bind(Report report){
+    public void bind(Report report){
         txtNUmber.setText(report.getNumber());
         if (report.isNo_rek()){
-            imgIcon.setBackgroundResource(R.drawable.ic_bank_24dp);
+            imgIcon.setBackgroundResource(R.mipmap.ic_bank_bg);
         } else {
-            imgIcon.setBackgroundResource(R.drawable.ic_contact_phone_24dp);
+            imgIcon.setBackgroundResource(R.mipmap.ic_phone_bg);
         }
         view.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), ReportDetilActivity.class);
