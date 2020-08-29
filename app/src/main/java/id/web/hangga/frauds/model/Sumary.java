@@ -15,20 +15,28 @@ public class Sumary extends Report implements Parcelable {
             return new Sumary[size];
         }
     };
+    private int totalKasus;
     private int totalRek;
     private int totalTelp;
     private Double totalRugi;
     private Double newRugi;
-
     public Sumary() {
         this.setType(Report.TYPE_SUMMARY);
     }
-
     protected Sumary(Parcel in) {
+        this.totalKasus = in.readInt();
         this.totalRek = in.readInt();
         this.totalTelp = in.readInt();
         this.totalRugi = (Double) in.readValue(Double.class.getClassLoader());
         this.newRugi = (Double) in.readValue(Double.class.getClassLoader());
+    }
+
+    public int getTotalKasus() {
+        return totalKasus;
+    }
+
+    public void setTotalKasus(int totalKasus) {
+        this.totalKasus = totalKasus;
     }
 
     public int getTotalRek() {
@@ -70,6 +78,7 @@ public class Sumary extends Report implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.totalKasus);
         dest.writeInt(this.totalRek);
         dest.writeInt(this.totalTelp);
         dest.writeValue(this.totalRugi);

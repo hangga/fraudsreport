@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
+import id.web.hangga.frauds.model.Frauds;
+import id.web.hangga.frauds.model.Report;
+
 public class FraudItem {
     @SerializedName("id")
     @Expose
@@ -14,10 +17,10 @@ public class FraudItem {
     private int reportId;
     @SerializedName("createdAt")
     @Expose
-    private Date createdAt;
+    private String createdAt;
     @SerializedName("updatedAt")
     @Expose
-    private Date updatedAt;
+    private String updatedAt;
     @SerializedName("jenis_penipuan")
     @Expose
     private String jenis_penipuan;
@@ -37,6 +40,7 @@ public class FraudItem {
         frauds.setJenis_penipuan(jenis_penipuan);
         frauds.setJumlah_kerugian(jumlah_kerugian);
         frauds.setKota_korban(kota_korban);
+        frauds.setType(Frauds.TYPE_ITEM_FRAUD);
         return frauds;
     }
 }

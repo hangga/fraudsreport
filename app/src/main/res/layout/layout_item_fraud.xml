@@ -34,7 +34,7 @@
             tools:text="2020-Januari-12"/>
 
         <TextView
-            android:id="@+id/txtNUmber"
+            android:id="@+id/txtJenis"
             android:layout_marginLeft="@dimen/padding_card_inner_inner"
             android:layout_marginTop="@dimen/padding_card_inner_inner"
             android:layout_below="@+id/txtDate"
@@ -49,7 +49,7 @@
             android:id="@+id/txtKerugian"
             android:layout_marginLeft="@dimen/padding_card_inner_inner"
             android:layout_marginTop="@dimen/padding_card_inner_vert"
-            android:layout_below="@+id/txtNUmber"
+            android:layout_below="@+id/txtJenis"
             android:fontFamily="@font/roboto_regular"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"

@@ -43,7 +43,7 @@ public class FraudsPresenter {
 
     public void updateFraud(Frauds frauds){
         view.onProgress(true);
-        apiInterface.updateFrauds(frauds.getReportId(),frauds.getId(), frauds.getJenis_penipuan(), frauds.getJumlah_kerugian(),
+        apiInterface.updateFrauds(frauds.getReportId(),frauds.getId(), frauds.getJenis_penipuan(), String.valueOf(frauds.getJumlah_kerugian()),
                 frauds.getKota_korban())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -52,7 +52,7 @@ public class FraudsPresenter {
 
     public void createFraud(Frauds frauds){
         view.onProgress(true);
-        apiInterface.newFrauds(frauds.getReportId(), frauds.getJenis_penipuan(), frauds.getJumlah_kerugian(),
+        apiInterface.newFrauds(frauds.getReportId(), frauds.getJenis_penipuan(), String.valueOf(frauds.getJumlah_kerugian()),
                 frauds.getKota_korban())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

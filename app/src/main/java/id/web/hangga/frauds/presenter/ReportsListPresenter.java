@@ -122,10 +122,11 @@ public class ReportsListPresenter {
                                 Report report = reportItems.get(i).toReportparcel();
                                 if (report.isNo_rek()) totalRek++;
                                 if (report.isNo_telp()) totalTelp++;
-                                reports.add(1, report);
+                                reports.add(report);
                             }
                             sumary.setTotalRek(totalRek);
                             sumary.setTotalTelp(totalTelp);
+                            sumary.setTotalKasus(reportItems.size());
                             view.onGetAllDataReport(reports, sumary);
                         }
                     }

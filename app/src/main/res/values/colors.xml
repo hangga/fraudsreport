@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#0069FF</color>
+    <color name="colorPrimaryDark">#0037FF</color>
+    <color name="colorAccent">#FEA500</color>
 
     <color name="bg_splash">@color/colorPrimary</color>
     <color name="white">#FFFFFF</color>
     <color name="black_flat">#2E3436</color>
     <color name="brownisgrey">#636363</color>
     <color name="white_two">#d6d6d6</color>
+    <color name="red_subtitle">#F36152</color>
 </resources>

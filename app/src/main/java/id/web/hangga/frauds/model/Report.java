@@ -20,8 +20,8 @@ public class Report implements Parcelable {
         }
     };
     private int id;
-    private String createdAt;
-    private String upStringdAt;
+    public String createdAt;
+    public String upStringdAt;
     private String number;
     private boolean no_telp = false;
     private boolean no_rek = false;

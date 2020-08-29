@@ -5,7 +5,10 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
-public class Frauds implements Parcelable {
+public class Frauds extends Report implements Parcelable {
+    public static int TYPE_SUMMARY = 0;
+    public static int TYPE_ITEM_FRAUD = 1;
+    public static int TYPE_PAGI = 2;
     public static final Parcelable.Creator<Frauds> CREATOR = new Parcelable.Creator<Frauds>() {
         @Override
         public Frauds createFromParcel(Parcel source) {
@@ -19,8 +22,6 @@ public class Frauds implements Parcelable {
     };
     private int id;
     private int reportId;
-    private Date createdAt;
-    private Date updatedAt;
     private String jenis_penipuan;
     private String jumlah_kerugian;
     private String kota_korban;
@@ -31,10 +32,8 @@ public class Frauds implements Parcelable {
     protected Frauds(Parcel in) {
         this.id = in.readInt();
         this.reportId = in.readInt();
-        long tmpCreatedAt = in.readLong();
-        this.createdAt = tmpCreatedAt == -1 ? null : new Date(tmpCreatedAt);
-        long tmpUpdatedAt = in.readLong();
-        this.updatedAt = tmpUpdatedAt == -1 ? null : new Date(tmpUpdatedAt);
+        this.createdAt = in.readString();
+        this.upStringdAt = in.readString();
         this.jenis_penipuan = in.readString();
         this.jumlah_kerugian = in.readString();
         this.kota_korban = in.readString();
@@ -56,22 +55,6 @@ public class Frauds implements Parcelable {
         this.reportId = reportId;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     public String getJenis_penipuan() {
         return jenis_penipuan;
     }
@@ -80,8 +63,8 @@ public class Frauds implements Parcelable {
         this.jenis_penipuan = jenis_penipuan;
     }
 
-    public String getJumlah_kerugian() {
-        return jumlah_kerugian;
+    public Double getJumlah_kerugian() {
+        return Double.parseDouble(jumlah_kerugian);
     }
 
     public void setJumlah_kerugian(String jumlah_kerugian) {
@@ -105,8 +88,8 @@ public class Frauds implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
         dest.writeInt(this.reportId);
-        dest.writeLong(this.createdAt != null ? this.createdAt.getTime() : -1);
-        dest.writeLong(this.updatedAt != null ? this.updatedAt.getTime() : -1);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.upStringdAt);
         dest.writeString(this.jenis_penipuan);
         dest.writeString(this.jumlah_kerugian);
         dest.writeString(this.kota_korban);

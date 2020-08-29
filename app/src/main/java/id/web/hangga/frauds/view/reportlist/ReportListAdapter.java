@@ -1,6 +1,5 @@
 package id.web.hangga.frauds.view.reportlist;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +20,9 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private static final int TYPE_ITEM_REPORT = 1;
     private static final int TYPE_PAGI = 2;
     private List<Report> reportList = new ArrayList<>();
-    private Context context;
     private Sumary sumary;
 
-    public ReportListAdapter(Context context) {
-        this.context = context;
+    public ReportListAdapter() {
     }
 
     public void setSumary(Sumary sumary) {
@@ -36,10 +33,6 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void setReportList(List<Report> reportList) {
         this.reportList = reportList;
         notifyDataSetChanged();
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
     }
 
     @Override
@@ -54,8 +47,8 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_report, parent, false);
             return new ReportViewHolder(itemView);
         } else if (viewType == TYPE_SUMMARY) {
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_summary, parent, false);
-            return new SummaryViewHoder(itemView);
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_summary_report, parent, false);
+            return new ReportSummaryHoder(itemView);
         } else
             return null;
     }
@@ -64,8 +57,8 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ReportViewHolder) {
             ((ReportViewHolder) holder).bind(reportList.get(position));
-        } else if (holder instanceof SummaryViewHoder) {
-            ((SummaryViewHoder) holder).bind(sumary.getTotalRek(), sumary.getTotalTelp(), sumary.getTotalRugi(), sumary.getNewRugi());
+        } else if (holder instanceof ReportSummaryHoder) {
+            ((ReportSummaryHoder) holder).bind(sumary.getTotalRek(), sumary.getTotalTelp(), sumary.getTotalKasus());
         }
     }
 

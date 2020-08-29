@@ -1,7 +1,9 @@
-package id.web.hangga.frauds.view.reportlist;
+package id.web.hangga.frauds.view.reportdetil;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -9,10 +11,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -22,9 +20,13 @@ import id.web.hangga.frauds.R;
 import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.model.Sumary;
+import id.web.hangga.frauds.presenter.FraudsPresenter;
+import id.web.hangga.frauds.presenter.ReportDetilPresenter;
 import id.web.hangga.frauds.presenter.ReportsListPresenter;
+import id.web.hangga.frauds.view.reportlist.ReportListActivity;
+import id.web.hangga.frauds.view.reportlist.ReportListAdapter;
 
-public class ReportListActivity extends AppCompatActivity implements ReportsListPresenter.View {
+public class ReportDetilActivity extends AppCompatActivity implements ReportDetilPresenter.View {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -33,77 +35,43 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
     @BindView(R.id.recyclerMain)
     RecyclerView recyclerMain;
 
-    ReportListAdapter reportListAdapter;
-    ReportsListPresenter reportsListPresenter;
+    ReportDetilPresenter reportDetilPresenter;
+    FraudListAdapter fraudListAdapter;
+    Report report;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_report_detil);
+        report = getIntent().getParcelableExtra("report");
+        Log.d("JAJAL-REPORTID", String.valueOf(report.getId()));
         ButterKnife.bind(this);
         setupactionbar();
         initrecycler();
     }
 
     void setupactionbar() {
-        toolbar.setTitle(getString(R.string.report_list));
+        toolbar.setTitle(getString(R.string.fraud_list));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationOnClickListener(view -> finish());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getWindow().setStatusBarColor(ContextCompat.getColor(ReportListActivity.this,
+            getWindow().setStatusBarColor(ContextCompat.getColor(ReportDetilActivity.this,
                     R.color.colorPrimary));
         }
     }
 
     void initrecycler() {
-        reportListAdapter = new ReportListAdapter();
+        fraudListAdapter = new FraudListAdapter();
         recyclerMain.setLayoutManager(new LinearLayoutManager(this));
-        reportsListPresenter = new ReportsListPresenter(this);
-        reportsListPresenter.getAllData();
-        swiperefresh.setOnRefreshListener(() -> reportsListPresenter.getAllData());
+        reportDetilPresenter = new ReportDetilPresenter(this);
+        reportDetilPresenter.getReportDetil(report.getId());
+        swiperefresh.setOnRefreshListener(() -> reportDetilPresenter.getReportDetil(report.getId()));
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar ReportItem clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onReportResult(Report report) {
-
-    }
-
-    @Override
-    public void onReportDeleted(boolean isSuccess) {
-
-    }
-
-    @Override
-    public void onGetAllDataReport(List<Report> reports, Sumary sumary) {
-        reportListAdapter.setReportList(reports);
-        reportListAdapter.setSumary(sumary);
-        recyclerMain.setAdapter(reportListAdapter);
-    }
 
     @Override
     public void onProgress(boolean isShow) {
@@ -123,5 +91,12 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
     @Override
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onReportDetil(List<Frauds> frauds, Sumary sumary) {
+        fraudListAdapter.setFraudsList(frauds);
+        fraudListAdapter.setSumary(sumary);
+        recyclerMain.setAdapter(fraudListAdapter);
     }
 }
