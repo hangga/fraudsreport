@@ -8,6 +8,7 @@ import java.util.List;
 import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.repository.remote.ApiInterface;
+import id.web.hangga.frauds.repository.remote.RetrofitClient;
 import id.web.hangga.frauds.repository.remote.response.FraudItem;
 import id.web.hangga.frauds.repository.remote.response.ReportItem;
 import id.web.hangga.frauds.view.BaseView;
@@ -25,9 +26,9 @@ public class ReportsPresenter {
     private List<Report> reports;
     private List<Frauds> frauds;
 
-    public ReportsPresenter(View view, ApiInterface apiInterface){
+    public ReportsPresenter(View view){
         this.view = view;
-        this.apiInterface = apiInterface;
+        this.apiInterface = RetrofitClient.getRetrofit().create(ApiInterface.class);
     }
 
     SingleObserver<ReportItem> reportItemSingleObserver = new SingleObserver<ReportItem>() {

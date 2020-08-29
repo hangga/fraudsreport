@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="1dp"
+    android:layout_marginLeft="@dimen/padding_page_normal"
+    android:layout_marginRight="@dimen/padding_page_normal"
+    android:layout_marginTop="@dimen/margin_card_vertical"
+    android:layout_marginBottom="@dimen/margin_card_vertical"
+    android:minHeight="76dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:background="@drawable/selector_global"
+        android:paddingTop="@dimen/padding_item_v"
+        android:paddingBottom="@dimen/padding_item_v"
+        android:paddingLeft="@dimen/padding_item_h"
+        android:paddingRight="@dimen/padding_item_h"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content">
+        <ImageView
+            android:id="@+id/imgThumb"
+            android:layout_width="@dimen/size_thumbnail_product_item"
+            android:layout_height="@dimen/size_thumbnail_product_item"/>
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_marginLeft="@dimen/padding_card_inner_inner"
+            android:layout_marginRight="@dimen/padding_card_inner_inner"
+            android:layout_toLeftOf="@+id/txtStok"
+            android:layout_toRightOf="@+id/imgThumb"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="2"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/size_title_item"
+            tools:text="Odol"/>
+
+        <TextView
+            android:id="@+id/txtPrice"
+            android:layout_marginLeft="@dimen/padding_card_inner_inner"
+            android:layout_toRightOf="@+id/imgThumb"
+            android:layout_below="@+id/txtTitle"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@color/brownisgrey"
+            android:textSize="@dimen/size_title_item"
+            tools:text="Iki Jenenge Odol"/>
+        <TextView
+            android:id="@+id/txtStok"
+            android:layout_marginLeft="@dimen/padding_card_inner_inner"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="right"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:maxLines="2"
+            android:textColor="@color/brownisgrey"
+            android:textSize="@dimen/size_title_item"
+            tools:text="Stok"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

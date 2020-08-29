@@ -5,6 +5,7 @@ import java.util.List;
 import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.repository.remote.ApiInterface;
+import id.web.hangga.frauds.repository.remote.RetrofitClient;
 import id.web.hangga.frauds.repository.remote.response.FraudItem;
 import id.web.hangga.frauds.view.BaseView;
 import io.reactivex.SingleObserver;
@@ -17,9 +18,9 @@ public class FraudsPresenter {
     private View view;
     private ApiInterface apiInterface;
 
-    public FraudsPresenter(View view, ApiInterface apiInterface){
+    public FraudsPresenter(View view){
         this.view = view;
-        this.apiInterface = apiInterface;
+        this.apiInterface = RetrofitClient.getRetrofit().create(ApiInterface.class);
     }
 
     SingleObserver<FraudItem> fraudItemSingleObserver = new SingleObserver<FraudItem>() {
