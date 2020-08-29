@@ -20,47 +20,45 @@
         android:layout_height="match_parent"
         android:layout_width="wrap_content">
         <ImageView
-            android:id="@+id/imgThumb"
-            android:layout_width="@dimen/size_thumbnail_product_item"
-            android:layout_height="@dimen/size_thumbnail_product_item"/>
+            android:id="@+id/imgIcon"
+            android:src="@drawable/ic_phone_48dp"
+            android:scaleType="fitCenter"
+            android:layout_width="42dp"
+            android:layout_height="42dp"/>
         <TextView
-            android:id="@+id/txtTitle"
+            android:id="@+id/txtDate"
+            android:layout_marginTop="2dp"
             android:layout_marginLeft="@dimen/padding_card_inner_inner"
             android:layout_marginRight="@dimen/padding_card_inner_inner"
-            android:layout_toLeftOf="@+id/txtStok"
-            android:layout_toRightOf="@+id/imgThumb"
+            android:layout_toLeftOf="@+id/imgMore"
+            android:layout_toRightOf="@+id/imgIcon"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:maxLines="2"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/size_title_item"
-            tools:text="Odol"/>
+            tools:text="2020-Januari-12"/>
 
         <TextView
-            android:id="@+id/txtPrice"
+            android:id="@+id/txtNumber"
             android:layout_marginLeft="@dimen/padding_card_inner_inner"
-            android:layout_toRightOf="@+id/imgThumb"
-            android:layout_below="@+id/txtTitle"
+            android:layout_toRightOf="@+id/imgIcon"
+            android:layout_below="@+id/txtDate"
             android:fontFamily="@font/roboto_regular"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textColor="@color/brownisgrey"
             android:textSize="@dimen/size_title_item"
-            tools:text="Iki Jenenge Odol"/>
-        <TextView
-            android:id="@+id/txtStok"
+            tools:text="Rp.125.000,-"/>
+        <ImageView
+            android:id="@+id/imgMore"
             android:layout_marginLeft="@dimen/padding_card_inner_inner"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/roboto_regular"
-            android:gravity="right"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:maxLines="2"
-            android:textColor="@color/brownisgrey"
-            android:textSize="@dimen/size_title_item"
+            android:src="@drawable/ic_more_horiz_36dp"
+            android:layout_height="32dp"
+            android:layout_width="32dp"
             tools:text="Stok"/>
     </RelativeLayout>
 
