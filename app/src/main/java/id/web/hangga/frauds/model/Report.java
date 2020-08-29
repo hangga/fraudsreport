@@ -3,9 +3,11 @@ package id.web.hangga.frauds.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Date;
 
 public class Report implements Parcelable {
+    public static int TYPE_SUMMARY = 0;
+    public static int TYPE_ITEM_REPORT = 1;
+    public static int TYPE_PAGI = 2;
     public static final Parcelable.Creator<Report> CREATOR = new Parcelable.Creator<Report>() {
         @Override
         public Report createFromParcel(Parcel source) {
@@ -18,24 +20,32 @@ public class Report implements Parcelable {
         }
     };
     private int id;
-    private Date createdAt;
-    private Date updatedAt;
+    private String createdAt;
+    private String upStringdAt;
     private String number;
-    private boolean no_telp;
-    private boolean no_rek;
+    private boolean no_telp = false;
+    private boolean no_rek = false;
+    private int type;
 
     public Report() {
     }
 
     protected Report(Parcel in) {
         this.id = in.readInt();
-        long tmpCreatedAt = in.readLong();
-        this.createdAt = tmpCreatedAt == -1 ? null : new Date(tmpCreatedAt);
-        long tmpUpdatedAt = in.readLong();
-        this.updatedAt = tmpUpdatedAt == -1 ? null : new Date(tmpUpdatedAt);
+        this.createdAt = in.readString();
+        this.upStringdAt = in.readString();
         this.number = in.readString();
-        this.no_telp = in.readByte() != 0;
-        this.no_rek = in.readByte() != 0;
+        this.no_telp = in.readBoolean(); //in.readByte() != 0;
+        this.no_rek = in.readBoolean(); //in.readByte() != 0;
+        this.type = in.readInt();
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public int getId() {
@@ -46,20 +56,20 @@ public class Report implements Parcelable {
         this.id = id;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public String getUpStringdAt() {
+        return upStringdAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAt(String upStringdAt) {
+        this.upStringdAt = upStringdAt;
     }
 
     public String getNumber() {
@@ -94,10 +104,11 @@ public class Report implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
-        dest.writeLong(this.createdAt != null ? this.createdAt.getTime() : -1);
-        dest.writeLong(this.updatedAt != null ? this.updatedAt.getTime() : -1);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.upStringdAt);
         dest.writeString(this.number);
-        dest.writeByte(this.no_telp ? (byte) 1 : (byte) 0);
-        dest.writeByte(this.no_rek ? (byte) 1 : (byte) 0);
+        dest.writeBoolean(this.no_telp);
+        dest.writeBoolean(this.no_rek);
+        dest.writeInt(this.type);
     }
 }

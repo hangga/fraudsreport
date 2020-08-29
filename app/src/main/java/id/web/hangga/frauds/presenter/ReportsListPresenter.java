@@ -7,6 +7,7 @@ import java.util.List;
 
 import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;
+import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.repository.remote.ApiInterface;
 import id.web.hangga.frauds.repository.remote.RetrofitClient;
 import id.web.hangga.frauds.repository.remote.response.FraudItem;
@@ -19,14 +20,15 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class ReportsPresenter {
+public class ReportsListPresenter {
 
     private View view;
     private ApiInterface apiInterface;
     private List<Report> reports;
     private List<Frauds> frauds;
+    private Sumary sumary;
 
-    public ReportsPresenter(View view){
+    public ReportsListPresenter(View view){
         this.view = view;
         this.apiInterface = RetrofitClient.getRetrofit().create(ApiInterface.class);
     }
@@ -91,41 +93,6 @@ public class ReportsPresenter {
                 });
     }
 
-    public void getReportDetil(int id){
-        view.onProgress(true);
-        apiInterface.getReportDetil(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<FraudItem>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(List<FraudItem> fraudItems) {
-                        if (fraudItems.size() == 0){
-                            view.onEmpty();
-                        } else {
-                            frauds = new ArrayList<>();
-                            for (int i = 0; i < fraudItems.size(); i++) {
-                                frauds.add(0, fraudItems.get(i).toFraudsParcel());
-                            }
-                            view.onReportDetil(frauds);
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        view.onError(e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        view.onProgress(false);
-                    }
-                });
-    }
 
     public void getAllData(){
         view.onProgress(true);
@@ -144,10 +111,22 @@ public class ReportsPresenter {
                             view.onEmpty();
                         } else {
                             reports = new ArrayList<>();
+                            Report summaryItem = new Report();
+                            summaryItem.setType(Report.TYPE_SUMMARY);
+                            reports.add(0, summaryItem);
+
+                            int totalRek = 0;
+                            int totalTelp = 0;
+                            sumary = new Sumary();
                             for (int i = 0; i < reportItems.size(); i++){
-                                reports.add(0, reportItems.get(i).toReportparcel());
+                                Report report = reportItems.get(i).toReportparcel();
+                                if (report.isNo_rek()) totalRek++;
+                                if (report.isNo_telp()) totalTelp++;
+                                reports.add(1, report);
                             }
-                            view.onGetAllDataReport(reports);
+                            sumary.setTotalRek(totalRek);
+                            sumary.setTotalTelp(totalTelp);
+                            view.onGetAllDataReport(reports, sumary);
                         }
                     }
 
@@ -166,7 +145,6 @@ public class ReportsPresenter {
     public interface View extends BaseView{
         void onReportResult(Report report);
         void onReportDeleted(boolean isSuccess);
-        void onGetAllDataReport(List<Report> reports);
-        void onReportDetil(List<Frauds> frauds);
+        void onGetAllDataReport(List<Report> reports, Sumary sumary);
     }
 }

@@ -13,10 +13,10 @@ public class ReportItem {
     private int id;
     @SerializedName("createdAt")
     @Expose
-    private Date createdAt;
+    private String createdAt;
     @SerializedName("updatedAt")
     @Expose
-    private Date updatedAt;
+    private String updatedAt;
     @SerializedName("number")
     @Expose
     private String number;
@@ -35,6 +35,7 @@ public class ReportItem {
         report.setNumber(number);
         report.setNo_rek(no_rek);
         report.setNo_telp(no_telp);
+        report.setType(Report.TYPE_ITEM_REPORT);
         return report;
     }
 }

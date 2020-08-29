@@ -6,6 +6,7 @@
 
     <color name="bg_splash">@color/colorPrimary</color>
     <color name="white">#FFFFFF</color>
+    <color name="black_flat">#2E3436</color>
     <color name="brownisgrey">#636363</color>
     <color name="white_two">#d6d6d6</color>
 </resources>

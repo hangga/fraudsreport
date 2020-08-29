@@ -7,6 +7,7 @@
     <dimen name="margin_card_vertical_extra_large">120dp</dimen>
     <dimen name="padding_card_inner">12dp</dimen>
     <dimen name="padding_card_inner_inner">8dp</dimen>
+    <dimen name="padding_card_inner_vert">4dp</dimen>
     <dimen name="size_title_item">14sp</dimen>
 
     <dimen name="padding_item_h">12dp</dimen>
