@@ -15,12 +15,18 @@ import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.util.Prop;
+import id.web.hangga.frauds.view.reportlist.OnPrepareToDelete;
 import id.web.hangga.frauds.view.reportlist.ReportViewHolder;
 
 public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Sumary sumary;
     private Report report;
+    private OnPrepareToDelete onPrepareToDelete;
+
+    void setOnPrepareToDelete(OnPrepareToDelete onPrepareToDelete) {
+        this.onPrepareToDelete = onPrepareToDelete;
+    }
 
     public void setReport(Report report) {
         this.report = report;
@@ -29,14 +35,14 @@ public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private List<Frauds> fraudsList = new ArrayList<>();
 
-    public FraudListAdapter(){}
+    FraudListAdapter(){}
 
-    public void setSumary(Sumary sumary) {
+    void setSumary(Sumary sumary) {
         this.sumary = sumary;
         notifyDataSetChanged();
     }
 
-    public void setFraudsList(List<Frauds> fraudsList) {
+    void setFraudsList(List<Frauds> fraudsList) {
         this.fraudsList = fraudsList;
         notifyDataSetChanged();
     }
@@ -69,7 +75,19 @@ public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (holder instanceof ReportViewHolder) {
             ((ReportViewHolder) holder).bind(report, null);
         } else if (holder instanceof FraudViewHolder) {
-            ((FraudViewHolder) holder).bind(fraudsList.get(position));
+            ((FraudViewHolder) holder).bind(fraudsList.get(position), new OnPrepareToDelete() {
+                @Override
+                public void onPrepareToDelete(Report report) {
+
+                }
+
+                @Override
+                public void onPrepareToDelete(Frauds frauds) {
+                    onPrepareToDelete.onPrepareToDelete(frauds);
+                    fraudsList.remove(frauds);
+                    notifyDataSetChanged();
+                }
+            });
         } else if (holder instanceof FraudSummaryHolder) {
             ((FraudSummaryHolder) holder).bind(sumary.getTotalKasus(),
                     sumary.getTotalRugi(), sumary.getNewRugi());

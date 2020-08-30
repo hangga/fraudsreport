@@ -108,6 +108,6 @@ public interface ApiInterface {
      * @return
      */
     @DELETE("reports/{report_id}/frauds/{fraud_id}")
-    Single<Response<Void>> deleteFrauds(@Path("report_id") int report_id,
+    Single<FraudItem> deleteFrauds(@Path("report_id") int report_id,
                                     @Path("fraud_id") int fraud_id);
 }

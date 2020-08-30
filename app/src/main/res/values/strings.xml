@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">frauds</string>
     <string name="report_list">Report</string>
-    <string name="fraud_list">frauds</string>
+    <string name="report_detil">Report Detil</string>
+    <string name="post_report">Kirim Laporan</string>
+    <string name="edit_report">Ubah Laporan</string>
+    <string name="fraud_list">Frauds List</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -14,11 +17,22 @@
     <string name="dilaporkan">Dilaporkan pada tanggal : </string>
     <string name="summary_kasus">Total kasus yang dilaporkan pengguna</string>
     <string name="summary_norek">Rekening bank telah dilaporkan pengguna</string>
-    <string name="summary_notelp">Nomor telephon telah dilaporkan pengguna</string>
+    <string name="summary_notelp">Nomor telepon telah dilaporkan pengguna</string>
     <string name="summary_rugi">Total kerugian sampai dengan saat ini</string>
     <string name="summary_new_rugi">Kerugian terbaru yang dilaporkan pengguna</string>
     <string name="title_activity_report_detil">ReportDetilActivity</string>
 
     <string name="update">Ubah</string>
     <string name="delete">Hapus</string>
+
+    <!--post form-->
+    <string name="submit">Submit</string>
+    <string name="top_heading">Laporkan Nomor Penipu Online</string>
+    <string name="nomor_rek">Nomor Rekening</string>
+    <string name="nomor_telp">Nomor Telepon</string>
+    <string name="jenis">Jenis Penipuan</string>
+    <string name="kerugian">Jumlah Kerugian</string>
+    <string name="kota">Kota/Tempat Tinggal Korban</string>
+    <string name="rek">Rekening</string>
+    <string name="phone">Telepon</string>
 </resources>

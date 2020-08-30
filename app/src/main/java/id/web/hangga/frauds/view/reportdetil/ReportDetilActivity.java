@@ -1,10 +1,12 @@
 package id.web.hangga.frauds.view.reportdetil;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -22,11 +24,11 @@ import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.presenter.FraudsPresenter;
 import id.web.hangga.frauds.presenter.ReportDetilPresenter;
-import id.web.hangga.frauds.presenter.ReportsListPresenter;
-import id.web.hangga.frauds.view.reportlist.ReportListActivity;
-import id.web.hangga.frauds.view.reportlist.ReportListAdapter;
+import id.web.hangga.frauds.util.Prop;
+import id.web.hangga.frauds.view.reportlist.OnPrepareToDelete;
 
-public class ReportDetilActivity extends AppCompatActivity implements ReportDetilPresenter.View {
+public class ReportDetilActivity extends AppCompatActivity implements ReportDetilPresenter.View,
+FraudsPresenter.View{
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -36,6 +38,7 @@ public class ReportDetilActivity extends AppCompatActivity implements ReportDeti
     RecyclerView recyclerMain;
 
     ReportDetilPresenter reportDetilPresenter;
+    FraudsPresenter fraudsPresenter;
     FraudListAdapter fraudListAdapter;
     Report report;
 
@@ -51,7 +54,8 @@ public class ReportDetilActivity extends AppCompatActivity implements ReportDeti
     }
 
     void setupactionbar() {
-        toolbar.setTitle(getString(R.string.fraud_list));
+        toolbar.setTitle(getString(R.string.report_detil));
+        toolbar.setSubtitle(getString(R.string.fraud_list));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -63,14 +67,37 @@ public class ReportDetilActivity extends AppCompatActivity implements ReportDeti
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_CANCELED) {
+            //Log.d(Prop.APP_NAME, "Error create report:RESULT_OK");
+            if (requestCode == Prop.POST_TYPE_UPDATE_FRAUD) {
+                Frauds frauds = data.getParcelableExtra("frauds");
+                fraudsPresenter.updateFraud(frauds);
+            }
+        }
+    }
+
     void initrecycler() {
+        fraudsPresenter = new FraudsPresenter(this);
         fraudListAdapter = new FraudListAdapter();
+        fraudListAdapter.setOnPrepareToDelete(new OnPrepareToDelete() {
+            @Override
+            public void onPrepareToDelete(Report report) {
+
+            }
+
+            @Override
+            public void onPrepareToDelete(Frauds frauds) {
+                fraudsPresenter.deleteFraud(frauds);
+            }
+        });
         recyclerMain.setLayoutManager(new LinearLayoutManager(this));
         reportDetilPresenter = new ReportDetilPresenter(this);
         reportDetilPresenter.getReportDetil(report.getId());
         swiperefresh.setOnRefreshListener(() -> reportDetilPresenter.getReportDetil(report.getId()));
     }
-
 
 
     @Override
@@ -99,5 +126,15 @@ public class ReportDetilActivity extends AppCompatActivity implements ReportDeti
         fraudListAdapter.setSumary(sumary);
         fraudListAdapter.setReport(report);
         recyclerMain.setAdapter(fraudListAdapter);
+    }
+
+    @Override
+    public void onFraudResult(Frauds frauds) {
+        reportDetilPresenter.getReportDetil(report.getId());
+    }
+
+    @Override
+    public void onFraudDeleted(Frauds frauds) {
+        reportDetilPresenter.getReportDetil(report.getId());
     }
 }

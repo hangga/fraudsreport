@@ -1,5 +1,6 @@
 package id.web.hangga.frauds.view.reportlist;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.MenuItem;
@@ -16,6 +17,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.web.hangga.frauds.R;
 import id.web.hangga.frauds.model.Report;
+import id.web.hangga.frauds.util.Prop;
+import id.web.hangga.frauds.view.postreport.PostReportActivity;
 import id.web.hangga.frauds.view.reportdetil.ReportDetilActivity;
 
 public class ReportViewHolder extends RecyclerView.ViewHolder {
@@ -65,6 +68,11 @@ public class ReportViewHolder extends RecyclerView.ViewHolder {
                                             onPrepareToDelete.onPrepareToDelete(report);
                                         }})
                                     .setNegativeButton(android.R.string.no, null).show();
+                        } else if (menuItem.getItemId() == R.id.menuEdit){
+                            Intent intent = new Intent(view.getContext(), PostReportActivity.class);
+                            intent.putExtra(Prop.PARAM_POST_TYPE, Prop.POST_TYPE_UPDATE_REPORT);
+                            intent.putExtra("report", report);
+                            ((Activity)view.getContext()).startActivityForResult(intent, Prop.POST_TYPE_UPDATE_REPORT);
                         }
                         return false;
                     }

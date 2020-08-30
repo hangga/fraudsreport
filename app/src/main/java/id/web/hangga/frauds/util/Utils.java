@@ -14,6 +14,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.core.content.ContextCompat;
+
+import com.skydoves.balloon.ArrowOrientation;
+import com.skydoves.balloon.Balloon;
+import com.skydoves.balloon.BalloonAnimation;
+import com.skydoves.balloon.OnBalloonClickListener;
+
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -23,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import id.web.hangga.frauds.R;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -38,6 +46,32 @@ public class Utils {
 
     static String[] mMonth = {"Januari", "Februari", "Maret", "April", "Mei", "Juni",
             "Juli", "Agustus", "Sepember", "Oktober", "Nopember", "Desember"};
+
+    public static void showBallon(Context context, View view, String message) {
+        Balloon balloon = new Balloon.Builder(context)
+                .setArrowSize(10)
+                .setArrowOrientation(ArrowOrientation.BOTTOM)
+                .setArrowVisible(true)
+                .setAutoDismissDuration(1000L)
+                .setWidthRatio(0.9f)
+                .setHeight(65)
+                .setTextSize(15f)
+                .setArrowPosition(0.62f)
+                .setCornerRadius(4f)
+                .setAlpha(0.9f)
+                .setText(message)
+                .setTextColor(ContextCompat.getColor(context, R.color.white))
+                .setBackgroundColor(ContextCompat.getColor(context, R.color.red_material))
+                .setOnBalloonClickListener(new OnBalloonClickListener() {
+                    @Override
+                    public void onBalloonClick(@NotNull View view) {
+                    }
+                })
+                .setBalloonAnimation(BalloonAnimation.FADE)
+                //.setLifecycleOwner(lifecycleOwner)
+                .build();
+        balloon.show(view);
+    }
 
     public static RequestBody toRequestBody(String str) {
         if (str == null) return null;
@@ -85,25 +119,6 @@ public class Utils {
         }
     }
 
-    /*public static String convertFormat(String inputDate) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-
-        Date date = null;
-        try {
-            date = simpleDateFormat.parse(inputDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        if (date == null) {
-            return "";
-        }
-
-        SimpleDateFormat convetDateFormat = new SimpleDateFormat("hh:mm a");
-
-        return convetDateFormat.format(date);
-    }*/
 
     public static int getScreenWidth(Context context) {
         DisplayMetrics displayMetrics = new DisplayMetrics();

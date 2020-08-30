@@ -34,7 +34,7 @@ public class ReportsListPresenter {
         this.apiInterface = RetrofitClient.getRetrofit().create(ApiInterface.class);
     }
 
-    SingleObserver<ReportItem> reportItemSingleObserver = new SingleObserver<ReportItem>() {
+    /*SingleObserver<ReportItem> reportItemSingleObserver = new SingleObserver<ReportItem>() {
         @Override
         public void onSubscribe(Disposable d) {
 
@@ -52,22 +52,62 @@ public class ReportsListPresenter {
         public void onError(Throwable e) {
             view.onError(e.getMessage());
         }
-    };
+    };*/
 
     public void updateReport(Report report){
         view.onProgress(true);
         apiInterface.updateReport(report.getId(), report.getNumber(), report.isNo_telp(), report.isNo_rek())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(reportItemSingleObserver);
+                .subscribe(new SingleObserver<ReportItem>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(ReportItem reportItem) {
+                        if (reportItem != null){
+                            view.onReportResult(reportItem.toReportparcel(), false);
+                        }
+                        view.onProgress(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
     }
 
     public void createReport(Report report){
+        Log.d(Prop.APP_NAME, "Error create report:createReport() mehod called");
+        Log.d(Prop.APP_NAME, "Error create report:"+report.getNumber());
+        Log.d(Prop.APP_NAME, "Error create report:"+report.isNo_rek());
+        Log.d(Prop.APP_NAME, "Error create report:"+report.isNo_telp());
         view.onProgress(true);
         apiInterface.newReport(report.getNumber(), report.isNo_telp(), report.isNo_rek())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(reportItemSingleObserver);
+                .subscribe(new SingleObserver<ReportItem>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(ReportItem reportItem) {
+                        if (reportItem != null){
+                            view.onReportResult(reportItem.toReportparcel(), true);
+                        }
+                        view.onProgress(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(Prop.APP_NAME, "Error create report:"+e.getMessage());
+                    }
+                });
     }
 
     public void deleteReport(Report report){
@@ -145,7 +185,7 @@ public class ReportsListPresenter {
     }
 
     public interface View extends BaseView{
-        void onReportResult(Report report);
+        void onReportResult(Report report, boolean isNew);
         void onReportDeleted(Report report);
         void onGetAllDataReport(List<Report> reports, Sumary sumary);
     }

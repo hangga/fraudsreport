@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import id.web.hangga.frauds.R;
+import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.util.Prop;
@@ -21,25 +22,25 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private Sumary sumary;
     private OnPrepareToDelete onPrepareToDelete;
 
-    public void setOnPrepareToDelete(OnPrepareToDelete onPrepareToDelete) {
+    void setOnPrepareToDelete(OnPrepareToDelete onPrepareToDelete) {
         this.onPrepareToDelete = onPrepareToDelete;
     }
 
-    public ReportListAdapter() {
+    ReportListAdapter() {
     }
 
-    public void setSumary(Sumary sumary) {
+    void setSumary(Sumary sumary) {
         this.sumary = sumary;
         notifyDataSetChanged();
     }
 
-    public void setReportList(List<Report> reportList) {
-        this.reportList = reportList;
+    void addReport(Report report){
+        this.reportList.add(1, report); // insert on index 1 a.k.a after summary
         notifyDataSetChanged();
     }
 
-    public void remove(Report report){
-        reportList.remove(report);
+    void setReportList(List<Report> reportList) {
+        this.reportList = reportList;
         notifyDataSetChanged();
     }
 
@@ -67,9 +68,17 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             ((ReportViewHolder) holder).bind(reportList.get(position), new OnPrepareToDelete() {
                 @Override
                 public void onPrepareToDelete(Report report) {
-                    reportList.remove(report);
-                    notifyDataSetChanged();
                     onPrepareToDelete.onPrepareToDelete(report);
+                    reportList.remove(report);
+                    sumary.setTotalKasus(reportList.size());
+                    if (report.isNo_telp()) sumary.setTotalTelp(sumary.getTotalTelp() - 1);
+                    if (report.isNo_rek()) sumary.setTotalRek(sumary.getTotalRek() - 1);
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                public void onPrepareToDelete(Frauds frauds) {
+
                 }
             });
         } else if (holder instanceof ReportSummaryHoder) {

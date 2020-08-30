@@ -13,77 +13,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/black_flat"
         android:orientation="vertical">
         <TextView
             android:id="@+id/txtTotalKasus"
             android:gravity="center"
             android:layout_marginLeft="@dimen/padding_page_normal"
             android:layout_marginRight="@dimen/padding_page_normal"
-            android:layout_marginTop="@dimen/padding_page_normal"
+            android:layout_marginTop="@dimen/padding_page_small"
             android:fontFamily="@font/nunito"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:textColor="@color/black_flat"
-            android:textSize="@dimen/size_value"
-            tools:text="6767-79987-7878"/>
-        <TextView
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/padding_page_normal"
-            android:layout_marginRight="@dimen/padding_page_normal"
-            android:layout_marginBottom="@dimen/padding_card_inner_inner"
-            android:fontFamily="@font/nunito"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:textColor="@color/black_flat"
-            android:textSize="@dimen/size_title_item"
-            android:text="@string/summary_kasus"/>
-        <View
-
-            android:layout_marginTop="@dimen/padding_card_inner"
-            android:layout_marginBottom="@dimen/padding_card_inner"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/white_two"/>
-        <TextView
-            android:id="@+id/txtTotalBank"
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/padding_page_normal"
-            android:layout_marginRight="@dimen/padding_page_normal"
-            android:layout_marginTop="@dimen/padding_page_normal"
-            android:fontFamily="@font/roboto_bold"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:textColor="@color/black_flat"
-            android:textSize="@dimen/size_value"
-            tools:text="6767-79987-7878"/>
-        <TextView
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/padding_page_normal"
-            android:layout_marginRight="@dimen/padding_page_normal"
-            android:layout_marginBottom="@dimen/padding_card_inner_inner"
-            android:fontFamily="@font/nunito"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:textColor="@color/black_flat"
-            android:textSize="@dimen/size_title_item"
-            android:text="@string/summary_norek"/>
-        <View
-            
-            android:layout_marginTop="@dimen/padding_card_inner"
-            android:layout_marginBottom="@dimen/padding_card_inner"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/white_two"/>
-        <TextView
-            android:id="@+id/txtTotalTelp"
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/padding_page_normal"
-            android:layout_marginRight="@dimen/padding_page_normal"
-            android:layout_marginTop="@dimen/padding_card_inner_inner"
-            android:fontFamily="@font/roboto_bold"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:textColor="@color/black_flat"
+            android:textColor="@color/white"
             android:textSize="@dimen/size_value"
             tools:text="6767-79987-7878"/>
         <TextView
@@ -94,7 +35,63 @@
             android:fontFamily="@font/nunito"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:textColor="@color/black_flat"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_title_item"
+            android:text="@string/summary_kasus"/>
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/div_summary"/>
+        <TextView
+            android:id="@+id/txtTotalBank"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/padding_page_normal"
+            android:layout_marginRight="@dimen/padding_page_normal"
+            android:layout_marginTop="@dimen/padding_page_small"
+            android:fontFamily="@font/roboto_bold"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_value"
+            tools:text="6767-79987-7878"/>
+        <TextView
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/padding_page_normal"
+            android:layout_marginRight="@dimen/padding_page_normal"
+            android:layout_marginBottom="@dimen/padding_page_normal"
+            android:fontFamily="@font/nunito"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_title_item"
+            android:text="@string/summary_norek"/>
+        <View
+            
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/div_summary"/>
+        <TextView
+            android:id="@+id/txtTotalTelp"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/padding_page_normal"
+            android:layout_marginRight="@dimen/padding_page_normal"
+            android:layout_marginTop="@dimen/padding_page_small"
+            android:fontFamily="@font/roboto_bold"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:textSize="@dimen/size_value"
+            tools:text="6767-79987-7878"/>
+        <TextView
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/padding_page_normal"
+            android:layout_marginRight="@dimen/padding_page_normal"
+            android:layout_marginBottom="@dimen/padding_page_normal"
+            android:fontFamily="@font/nunito"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
             android:textSize="@dimen/size_title_item"
             android:text="@string/summary_notelp"/>
     </LinearLayout>

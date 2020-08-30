@@ -1,9 +1,6 @@
 package id.web.hangga.frauds.presenter;
 
-import java.util.List;
-
 import id.web.hangga.frauds.model.Frauds;
-import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.repository.remote.ApiInterface;
 import id.web.hangga.frauds.repository.remote.RetrofitClient;
 import id.web.hangga.frauds.repository.remote.response.FraudItem;
@@ -16,13 +13,6 @@ import retrofit2.Response;
 
 public class FraudsPresenter {
     private View view;
-    private ApiInterface apiInterface;
-
-    public FraudsPresenter(View view){
-        this.view = view;
-        this.apiInterface = RetrofitClient.getRetrofit().create(ApiInterface.class);
-    }
-
     SingleObserver<FraudItem> fraudItemSingleObserver = new SingleObserver<FraudItem>() {
         @Override
         public void onSubscribe(Disposable d) {
@@ -40,17 +30,23 @@ public class FraudsPresenter {
             view.onError(e.getMessage());
         }
     };
+    private ApiInterface apiInterface;
 
-    public void updateFraud(Frauds frauds){
+    public FraudsPresenter(View view) {
+        this.view = view;
+        this.apiInterface = RetrofitClient.getRetrofit().create(ApiInterface.class);
+    }
+
+    public void updateFraud(Frauds frauds) {
         view.onProgress(true);
-        apiInterface.updateFrauds(frauds.getReportId(),frauds.getId(), frauds.getJenis_penipuan(), String.valueOf(frauds.getJumlah_kerugian()),
+        apiInterface.updateFrauds(frauds.getReportId(), frauds.getId(), frauds.getJenis_penipuan(), String.valueOf(frauds.getJumlah_kerugian()),
                 frauds.getKota_korban())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fraudItemSingleObserver);
     }
 
-    public void createFraud(Frauds frauds){
+    public void createFraud(Frauds frauds) {
         view.onProgress(true);
         apiInterface.newFrauds(frauds.getReportId(), frauds.getJenis_penipuan(), String.valueOf(frauds.getJumlah_kerugian()),
                 frauds.getKota_korban())
@@ -59,26 +55,27 @@ public class FraudsPresenter {
                 .subscribe(fraudItemSingleObserver);
     }
 
-    public void deleteFraud(Frauds frauds){
+    public void deleteFraud(Frauds frauds) {
         view.onProgress(true);
         apiInterface.deleteFrauds(frauds.getReportId(), frauds.getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Response<Void>>() {
+                .subscribe(new SingleObserver<FraudItem>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onSuccess(Response<Void> voidResponse) {
-                        view.onFraudDeleted(true);
+                    public void onSuccess(FraudItem fraudItem) {
+                        view.onFraudDeleted(fraudItem.toFraudsParcel());
                         view.onProgress(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         view.onError(e.getMessage());
+                        view.onProgress(false);
                     }
                 });
 
@@ -86,6 +83,6 @@ public class FraudsPresenter {
 
     public interface View extends BaseView {
         void onFraudResult(Frauds frauds);
-        void onFraudDeleted(boolean isSuccess);
+        void onFraudDeleted(Frauds frauds);
     }
 }

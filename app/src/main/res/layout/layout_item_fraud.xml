@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:maxLines="2"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/red_subtitle"
             android:textSize="@dimen/size_title_item"
             tools:text="2020-Januari-12"/>
 
@@ -71,9 +71,12 @@
         <ImageView
             android:id="@+id/imgMore"
             android:layout_alignParentRight="true"
+            android:scaleType="centerInside"
             android:src="@drawable/ic_more_horiz_black_24dp"
+            android:background="@drawable/selector_global"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_width="40dp"
             tools:text="Stok"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>

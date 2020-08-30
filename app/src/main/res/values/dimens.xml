@@ -2,6 +2,8 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="padding_page_normal">16dp</dimen>
+    <dimen name="padding_page_middle">12dp</dimen>
+    <dimen name="padding_page_small">6dp</dimen>
     <dimen name="padding_card">8dp</dimen>
     <dimen name="margin_card_vertical">4dp</dimen>
     <dimen name="margin_card_vertical_extra_large">120dp</dimen>
@@ -15,5 +17,6 @@
     <dimen name="padding_item_h">12dp</dimen>
     <dimen name="padding_item_v">14dp</dimen>
 
+    <dimen name="top_label_padding">8dp</dimen>
     <dimen name="size_thumbnail_product_item">48dp</dimen>
 </resources>
