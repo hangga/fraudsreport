@@ -9,9 +9,11 @@ import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.repository.remote.ApiInterface;
 import id.web.hangga.frauds.repository.remote.RetrofitClient;
 import id.web.hangga.frauds.repository.remote.response.FraudItem;
+import id.web.hangga.frauds.repository.remote.response.ReportItem;
 import id.web.hangga.frauds.util.Prop;
 import id.web.hangga.frauds.view.BaseView;
 import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -76,7 +78,59 @@ public class ReportDetilPresenter {
                 });
     }
 
+    public void deleteReport(Report report){
+        view.onProgress(true);
+        apiInterface.deleteReport(report.getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<ReportItem>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(ReportItem reportItem) {
+                        view.onReportDeleted(reportItem.toReportparcel());
+                        view.onProgress(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.onError(e.getMessage());
+                    }
+                });
+    }
+
+    public void updateReport(Report report){
+        view.onProgress(true);
+        apiInterface.updateReport(report.getId(), report.getNumber(), report.isNo_telp(), report.isNo_rek())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<ReportItem>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(ReportItem reportItem) {
+                        if (reportItem != null){
+                            view.onReportResult(reportItem.toReportparcel());
+                        }
+                        view.onProgress(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+    }
+
     public interface View extends BaseView{
+        void onReportResult(Report report);
+        void onReportDeleted(Report report);
         void onReportDetil(List<Frauds> frauds, Sumary sumary);
     }
 }

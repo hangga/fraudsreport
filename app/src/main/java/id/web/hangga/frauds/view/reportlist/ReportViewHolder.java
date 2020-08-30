@@ -1,9 +1,7 @@
 package id.web.hangga.frauds.view.reportlist;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -29,7 +27,7 @@ public class ReportViewHolder extends RecyclerView.ViewHolder {
     TextView txtNUmber;
     @BindView(R.id.imgMore)
     ImageView imgMore;
-    View view;
+    private View view;
 
     public ReportViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -37,9 +35,9 @@ public class ReportViewHolder extends RecyclerView.ViewHolder {
         this.view = itemView;
     }
 
-    public void bind(Report report, OnPrepareToDelete onPrepareToDelete){
+    public void bind(Report report, OnPrepareToDelete onPrepareToDelete) {
         txtNUmber.setText(report.getNumber());
-        if (report.isNo_rek()){
+        if (report.isNo_rek()) {
             imgIcon.setBackgroundResource(R.mipmap.ic_bank_bg);
         } else {
             imgIcon.setBackgroundResource(R.mipmap.ic_phone_bg);
@@ -50,35 +48,26 @@ public class ReportViewHolder extends RecyclerView.ViewHolder {
             intent.putExtra("report", report);
             view.getContext().startActivity(intent);
         });
-        imgMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(view.getContext(), imgMore);
-                popupMenu.getMenuInflater().inflate(R.menu.pop_up_menu_item, popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        if (menuItem.getItemId() == R.id.menuDelete){
-                            new AlertDialog.Builder(view.getContext())
-                                    .setTitle("Konfirmasi")
-                                    .setMessage("Hapus "+report.getNumber()+" ?")
-                                    .setIcon(android.R.drawable.ic_dialog_alert)
-                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int whichButton) {
-                                            onPrepareToDelete.onPrepareToDelete(report);
-                                        }})
-                                    .setNegativeButton(android.R.string.no, null).show();
-                        } else if (menuItem.getItemId() == R.id.menuEdit){
-                            Intent intent = new Intent(view.getContext(), PostReportActivity.class);
-                            intent.putExtra(Prop.PARAM_POST_TYPE, Prop.POST_TYPE_UPDATE_REPORT);
-                            intent.putExtra("report", report);
-                            ((Activity)view.getContext()).startActivityForResult(intent, Prop.POST_TYPE_UPDATE_REPORT);
-                        }
-                        return false;
-                    }
-                });
-                popupMenu.show();
-            }
+        imgMore.setOnClickListener(view -> {
+            PopupMenu popupMenu = new PopupMenu(view.getContext(), imgMore);
+            popupMenu.getMenuInflater().inflate(R.menu.pop_up_menu_item, popupMenu.getMenu());
+            popupMenu.setOnMenuItemClickListener(menuItem -> {
+                if (menuItem.getItemId() == R.id.menuDelete) {
+                    new AlertDialog.Builder(view.getContext())
+                            .setTitle("Konfirmasi")
+                            .setMessage("Hapus " + report.getNumber() + " ?")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setPositiveButton(android.R.string.yes, (dialog, whichButton) -> onPrepareToDelete.onPrepareToDelete(report))
+                            .setNegativeButton(android.R.string.no, null).show();
+                } else if (menuItem.getItemId() == R.id.menuEdit) {
+                    Intent intent = new Intent(view.getContext(), PostReportActivity.class);
+                    intent.putExtra(Prop.PARAM_POST_TYPE, Prop.POST_TYPE_UPDATE_REPORT);
+                    intent.putExtra("report", report);
+                    ((Activity) view.getContext()).startActivityForResult(intent, Prop.POST_TYPE_UPDATE_REPORT);
+                }
+                return false;
+            });
+            popupMenu.show();
         });
     }
 }

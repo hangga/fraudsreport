@@ -73,6 +73,11 @@ public class Utils {
         balloon.show(view);
     }
 
+    public static int dpToPx(Context context, int dp) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+
     public static RequestBody toRequestBody(String str) {
         if (str == null) return null;
         //RequestBody.create();

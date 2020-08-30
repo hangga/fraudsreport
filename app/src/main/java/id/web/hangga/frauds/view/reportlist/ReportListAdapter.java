@@ -18,9 +18,45 @@ import id.web.hangga.frauds.util.Prop;
 
 public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    int itemPerPage = 10;
+
     private List<Report> reportList = new ArrayList<>();
     private Sumary sumary;
     private OnPrepareToDelete onPrepareToDelete;
+
+
+    private List<Report> reportListPaged;
+
+    /**
+     * Menggenerate item per halaman
+     * Pleade, dont do this on real project
+     * @param page
+     */
+    public void generatePage(int page){
+        reportListPaged = new ArrayList<>();
+
+        int start = ((page - 1) * itemPerPage) + 1;
+        int end = start + itemPerPage;
+
+        reportListPaged.add(reportList.get(0)); // add Summary
+        for (int i = start; i < end; i++){
+            try{
+                reportListPaged.add(reportList.get(i)); // Add item report
+            }catch (Exception e){}
+        }
+        Report pagination = new Report();
+        pagination.setType(Prop.TYPE_PAGINATION);
+        reportListPaged.add(pagination); // Add pagination
+    }
+
+    /**
+     * Banyaknya halaman
+     * @return
+     */
+    int getPageCount(){
+        int pageCount = reportList.size() / itemPerPage;
+        return reportList.size() % itemPerPage > 0? pageCount + 1 : pageCount;
+    }
 
     void setOnPrepareToDelete(OnPrepareToDelete onPrepareToDelete) {
         this.onPrepareToDelete = onPrepareToDelete;
@@ -41,12 +77,14 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     void setReportList(List<Report> reportList) {
         this.reportList = reportList;
+        generatePage(1);
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return reportList.get(position).getType();
+        //return reportList.get(position).getType();
+        return reportListPaged.get(position).getType();
     }
 
     @NonNull
@@ -58,6 +96,9 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         } else if (viewType == Prop.TYPE_SUMMARY) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_summary_report, parent, false);
             return new ReportSummaryHoder(itemView);
+        } else if (viewType == Prop.TYPE_PAGINATION){
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_page, parent, false);
+            return new PageViewHolder(itemView);
         } else
             return null;
     }
@@ -65,7 +106,8 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ReportViewHolder) {
-            ((ReportViewHolder) holder).bind(reportList.get(position), new OnPrepareToDelete() {
+            //((ReportViewHolder) holder).bind(reportList.get(position), new OnPrepareToDelete() {
+            ((ReportViewHolder) holder).bind(reportListPaged.get(position), new OnPrepareToDelete() {
                 @Override
                 public void onPrepareToDelete(Report report) {
                     onPrepareToDelete.onPrepareToDelete(report);
@@ -83,12 +125,25 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             });
         } else if (holder instanceof ReportSummaryHoder) {
             ((ReportSummaryHoder) holder).bind(sumary.getTotalRek(), sumary.getTotalTelp(), sumary.getTotalKasus());
+        } else if (holder instanceof PageViewHolder){
+            ((PageViewHolder)holder).bind(getPageCount(), new OnItemPageListener() {
+                @Override
+                public void onPageListener(int page) {
+                    generatePage(page);
+                    notifyDataSetChanged();
+                }
+            });
         }
     }
 
     @Override
     public int getItemCount() {
-        return reportList.size();
+        //return reportList.size();
+        return reportListPaged.size();
+    }
+
+    public interface OnItemPageListener{
+        void onPageListener(int page);
     }
 
 }

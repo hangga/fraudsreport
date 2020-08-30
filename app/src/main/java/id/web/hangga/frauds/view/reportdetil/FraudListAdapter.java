@@ -78,14 +78,16 @@ public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             ((FraudViewHolder) holder).bind(fraudsList.get(position), new OnPrepareToDelete() {
                 @Override
                 public void onPrepareToDelete(Report report) {
-
+                    onPrepareToDelete.onPrepareToDelete(report);
                 }
 
                 @Override
                 public void onPrepareToDelete(Frauds frauds) {
-                    onPrepareToDelete.onPrepareToDelete(frauds);
-                    fraudsList.remove(frauds);
-                    notifyDataSetChanged();
+                    if (frauds != null){
+                        onPrepareToDelete.onPrepareToDelete(frauds);
+                        fraudsList.remove(frauds);
+                        notifyDataSetChanged();
+                    }
                 }
             });
         } else if (holder instanceof FraudSummaryHolder) {

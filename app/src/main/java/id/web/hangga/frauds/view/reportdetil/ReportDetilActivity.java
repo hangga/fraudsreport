@@ -75,6 +75,9 @@ FraudsPresenter.View{
             if (requestCode == Prop.POST_TYPE_UPDATE_FRAUD) {
                 Frauds frauds = data.getParcelableExtra("frauds");
                 fraudsPresenter.updateFraud(frauds);
+            }else if (requestCode == Prop.POST_TYPE_UPDATE_REPORT) {
+                Report report = data.getParcelableExtra("report");
+                reportDetilPresenter.updateReport(report);
             }
         }
     }
@@ -85,7 +88,7 @@ FraudsPresenter.View{
         fraudListAdapter.setOnPrepareToDelete(new OnPrepareToDelete() {
             @Override
             public void onPrepareToDelete(Report report) {
-
+                reportDetilPresenter.deleteReport(report);
             }
 
             @Override
@@ -118,6 +121,16 @@ FraudsPresenter.View{
     @Override
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onReportResult(Report report) {
+        reportDetilPresenter.getReportDetil(report.getId());
+    }
+
+    @Override
+    public void onReportDeleted(Report report) {
+        finish();
     }
 
     @Override

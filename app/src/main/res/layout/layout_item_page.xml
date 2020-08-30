@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/txtPage"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_margin="8dp"
+        android:text="1"
+        android:padding="4dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+</RelativeLayout>
