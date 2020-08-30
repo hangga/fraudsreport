@@ -18,7 +18,7 @@ import id.web.hangga.frauds.util.Prop;
 
 public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    int itemPerPage = 10;
+    private static final int ITEM_PERPAGE = 10;
 
     private List<Report> reportList = new ArrayList<>();
     private Sumary sumary;
@@ -32,21 +32,28 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
      * Pleade, dont do this on real project
      * @param page
      */
-    public void generatePage(int page){
+    private int selectedPage = 1;
+    private void generatePage(int page){
+        selectedPage = page;
         reportListPaged = new ArrayList<>();
 
-        int start = ((page - 1) * itemPerPage) + 1;
-        int end = start + itemPerPage;
+        int start = ((page - 1) * ITEM_PERPAGE) + 1;
+        int end = start + ITEM_PERPAGE;
 
-        reportListPaged.add(reportList.get(0)); // add Summary
+        // add Summary
+        reportListPaged.add(reportList.get(0));
+
+        // Add item report paged
         for (int i = start; i < end; i++){
             try{
-                reportListPaged.add(reportList.get(i)); // Add item report
+                reportListPaged.add(reportList.get(i));
             }catch (Exception e){}
         }
+
+        // Add item view Pagination
         Report pagination = new Report();
         pagination.setType(Prop.TYPE_PAGINATION);
-        reportListPaged.add(pagination); // Add pagination
+        reportListPaged.add(pagination);
     }
 
     /**
@@ -54,8 +61,8 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
      * @return
      */
     int getPageCount(){
-        int pageCount = reportList.size() / itemPerPage;
-        return reportList.size() % itemPerPage > 0? pageCount + 1 : pageCount;
+        int pageCount = reportList.size() / ITEM_PERPAGE;
+        return reportList.size() % ITEM_PERPAGE > 0? pageCount + 1 : pageCount;
     }
 
     void setOnPrepareToDelete(OnPrepareToDelete onPrepareToDelete) {
@@ -71,7 +78,16 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     void addReport(Report report){
+        this.reportListPaged.add(1, report); // insert on index 1 a.k.a after summary
         this.reportList.add(1, report); // insert on index 1 a.k.a after summary
+
+        Sumary newSummary = new Sumary();
+        newSummary.setTotalKasus(sumary.getTotalKasus() + 1);
+        newSummary.setTotalTelp(report.isNo_telp()?sumary.getTotalTelp() + 1:sumary.getTotalTelp());
+        newSummary.setTotalRek(report.isNo_rek()? sumary.getTotalRek() + 1:sumary.getTotalRek());
+        setSumary(newSummary);
+        notifyDataSetChanged();
+
         notifyDataSetChanged();
     }
 
@@ -112,9 +128,11 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 public void onPrepareToDelete(Report report) {
                     onPrepareToDelete.onPrepareToDelete(report);
                     reportList.remove(report);
-                    sumary.setTotalKasus(reportList.size());
-                    if (report.isNo_telp()) sumary.setTotalTelp(sumary.getTotalTelp() - 1);
-                    if (report.isNo_rek()) sumary.setTotalRek(sumary.getTotalRek() - 1);
+                    Sumary newSummary = new Sumary();
+                    newSummary.setTotalKasus(sumary.getTotalKasus() - 1);
+                    newSummary.setTotalTelp(report.isNo_telp()?sumary.getTotalTelp() - 1:sumary.getTotalTelp());
+                    newSummary.setTotalRek(report.isNo_rek()? sumary.getTotalRek() - 1:sumary.getTotalRek());
+                    setSumary(newSummary);
                     notifyDataSetChanged();
                 }
 
@@ -126,12 +144,9 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         } else if (holder instanceof ReportSummaryHoder) {
             ((ReportSummaryHoder) holder).bind(sumary.getTotalRek(), sumary.getTotalTelp(), sumary.getTotalKasus());
         } else if (holder instanceof PageViewHolder){
-            ((PageViewHolder)holder).bind(getPageCount(), new OnItemPageListener() {
-                @Override
-                public void onPageListener(int page) {
-                    generatePage(page);
-                    notifyDataSetChanged();
-                }
+            ((PageViewHolder)holder).bind(getPageCount(), page -> {
+                generatePage(page);
+                notifyDataSetChanged();
             });
         }
     }

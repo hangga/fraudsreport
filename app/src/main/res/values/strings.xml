@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">frauds</string>
-    <string name="report_list">Report</string>
+    <string name="app_name">Frauds Report</string>
+    <string name="report_list_title">Report</string>
+    <string name="report_list_subtitle">Daftar Nomor Terlapor</string>
     <string name="report_detil">Report Detil</string>
     <string name="post_report">Kirim Laporan</string>
     <string name="edit_report">Ubah Laporan</string>

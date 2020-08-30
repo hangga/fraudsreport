@@ -38,9 +38,9 @@ public class ReportViewHolder extends RecyclerView.ViewHolder {
     public void bind(Report report, OnPrepareToDelete onPrepareToDelete) {
         txtNUmber.setText(report.getNumber());
         if (report.isNo_rek()) {
-            imgIcon.setBackgroundResource(R.mipmap.ic_bank_bg);
+            imgIcon.setBackgroundResource(R.drawable.ic_card_18dp);
         } else {
-            imgIcon.setBackgroundResource(R.mipmap.ic_phone_bg);
+            imgIcon.setBackgroundResource(R.drawable.ic_phone_18dp);
         }
         view.setOnClickListener(view -> {
             if (view.getContext() instanceof ReportDetilActivity) return;

@@ -1,9 +1,7 @@
-package id.web.hangga.frauds.repository.remote.response;
+package id.web.hangga.frauds.data.remote.response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.Date;
 
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.util.Prop;

@@ -56,6 +56,7 @@ FraudsPresenter.View{
     void setupactionbar() {
         toolbar.setTitle(getString(R.string.report_detil));
         toolbar.setSubtitle(getString(R.string.fraud_list));
+        toolbar.setTitleMarginStart(0);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -70,6 +71,7 @@ FraudsPresenter.View{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d(Prop.APP_NAME, "Cek resultCode:resultCode:" + resultCode);
         if (resultCode != RESULT_CANCELED) {
             //Log.d(Prop.APP_NAME, "Error create report:RESULT_OK");
             if (requestCode == Prop.POST_TYPE_UPDATE_FRAUD) {

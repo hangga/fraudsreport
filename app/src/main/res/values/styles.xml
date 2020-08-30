@@ -10,6 +10,13 @@
         <item name="subtitleTextColor">@color/colorPrimarySmooth</item>
         <item name="colorControlNormal">@color/white</item>
         <item name="fontFamily">@font/open_serif_font</item>
+        <item name="toolbarStyle">@style/ToolbarStyle</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="titleMarginStart">32dp</item>
+        <!--<item name="contentInsetStart">0dp</item>
+        <item name="android:paddingRight">0dp</item>-->
     </style>
 
     <style name="AppTheme.NoActionBar">

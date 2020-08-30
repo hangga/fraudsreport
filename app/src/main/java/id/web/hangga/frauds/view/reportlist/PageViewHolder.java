@@ -29,7 +29,7 @@ class PageViewHolder extends RecyclerView.ViewHolder {
 
     private void reset() {
         for (int i = 0; i < itemPageList.size(); i++) {
-            itemPageList.get(i).setBackgroundResource(R.drawable.circle_blue);
+            itemPageList.get(i).setBackgroundResource(R.drawable.circle_black);
         }
     }
 
@@ -41,13 +41,13 @@ class PageViewHolder extends RecyclerView.ViewHolder {
                 if (i == 0) {
                     viewItemPage.setBackgroundResource(R.drawable.circle_yellow);
                 } else {
-                    viewItemPage.setBackgroundResource(R.drawable.circle_blue);
+                    viewItemPage.setBackgroundResource(R.drawable.circle_black);
                 }
-                int finalI = i;
+                int finali = i;
                 viewItemPage.setOnClickListener(view -> {
                     reset();
                     viewItemPage.setBackgroundResource(R.drawable.circle_yellow);
-                    onItemPageListener.onPageListener(finalI + 1);
+                    onItemPageListener.onPageListener(finali + 1);
                 });
                 itemPageList.add(viewItemPage);
                 linPaging.addView(viewItemPage);

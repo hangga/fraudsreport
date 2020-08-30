@@ -7,12 +7,10 @@ public class Prop {
     public static final int TYPE_ITEM_REPORT = 1;
     public static final int TYPE_ITEM_FRAUD = 2;
     public static final int TYPE_PAGINATION = 3;
-    /*public static final int RESULT_INSERT = 11;
-    public static final int RESULT_UPDATE = 12;*/
 
     // POst
-    public static final int POST_TYPE_INSERT_REPORT = 0;
-    public static final int POST_TYPE_UPDATE_REPORT = 1;
-    public static final int POST_TYPE_UPDATE_FRAUD = 2;
+    public static final int POST_TYPE_INSERT_REPORT = 123;
+    public static final int POST_TYPE_UPDATE_REPORT = 235;
+    public static final int POST_TYPE_UPDATE_FRAUD = 345;
 
 }

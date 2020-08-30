@@ -71,7 +71,7 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(Prop.APP_NAME, "Error create report:resultCode:" + resultCode);
+        Log.d(Prop.APP_NAME, "Cek resultCode:resultCode:" + resultCode);
         if (resultCode != RESULT_CANCELED) {
             Log.d(Prop.APP_NAME, "Error create report:RESULT_OK");
             if (requestCode == Prop.POST_TYPE_INSERT_REPORT) {
@@ -86,11 +86,13 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
     }
 
     void setupactionbar() {
-        toolbar.setTitle(getString(R.string.report_list));
+        toolbar.setTitle(getString(R.string.report_list_title));
+        toolbar.setSubtitle(getString(R.string.report_list_subtitle));
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setNavigationOnClickListener(view -> finish());
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //toolbar.setNavigationOnClickListener(view -> finish());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(ContextCompat.getColor(ReportListActivity.this,

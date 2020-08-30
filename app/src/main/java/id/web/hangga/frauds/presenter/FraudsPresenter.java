@@ -1,15 +1,14 @@
 package id.web.hangga.frauds.presenter;
 
 import id.web.hangga.frauds.model.Frauds;
-import id.web.hangga.frauds.repository.remote.ApiInterface;
-import id.web.hangga.frauds.repository.remote.RetrofitClient;
-import id.web.hangga.frauds.repository.remote.response.FraudItem;
+import id.web.hangga.frauds.data.remote.ApiInterface;
+import id.web.hangga.frauds.data.remote.RetrofitClient;
+import id.web.hangga.frauds.data.remote.response.FraudItem;
 import id.web.hangga.frauds.view.BaseView;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Response;
 
 public class FraudsPresenter {
     private View view;

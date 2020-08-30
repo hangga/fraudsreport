@@ -1,4 +1,4 @@
-package id.web.hangga.frauds.repository.remote;
+package id.web.hangga.frauds.data.remote;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

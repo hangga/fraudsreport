@@ -8,10 +8,9 @@ import java.util.List;
 import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.model.Sumary;
-import id.web.hangga.frauds.repository.remote.ApiInterface;
-import id.web.hangga.frauds.repository.remote.RetrofitClient;
-import id.web.hangga.frauds.repository.remote.response.FraudItem;
-import id.web.hangga.frauds.repository.remote.response.ReportItem;
+import id.web.hangga.frauds.data.remote.ApiInterface;
+import id.web.hangga.frauds.data.remote.RetrofitClient;
+import id.web.hangga.frauds.data.remote.response.ReportItem;
 import id.web.hangga.frauds.util.Prop;
 import id.web.hangga.frauds.view.BaseView;
 import io.reactivex.Observer;
@@ -19,7 +18,6 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Response;
 
 public class ReportsListPresenter {
 

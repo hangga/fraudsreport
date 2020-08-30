@@ -47,7 +47,7 @@ public class FraudViewHolder extends RecyclerView.ViewHolder {
     void bind(Frauds frauds, OnPrepareToDelete onPrepareToDelete){
         txtDate.setText(Utils.reformatDate(frauds.getCreatedAt()));
         txtJenis.setText(frauds.getJenis_penipuan());
-        txtKerugian.setText(String.valueOf(frauds.getJumlah_kerugian()));
+        txtKerugian.setText("Rp."+String.valueOf(frauds.getJumlah_kerugian()));
         txtKOta.setText(frauds.getKota_korban());
         imgMore.setOnClickListener(new View.OnClickListener() {
             @Override

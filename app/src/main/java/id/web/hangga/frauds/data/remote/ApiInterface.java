@@ -1,13 +1,12 @@
-package id.web.hangga.frauds.repository.remote;
+package id.web.hangga.frauds.data.remote;
 
 import java.util.List;
 
-import id.web.hangga.frauds.repository.remote.response.FraudItem;
+import id.web.hangga.frauds.data.remote.response.FraudItem;
 import io.reactivex.Observable;
 
-import id.web.hangga.frauds.repository.remote.response.ReportItem;
+import id.web.hangga.frauds.data.remote.response.ReportItem;
 import io.reactivex.Single;
-import retrofit2.Response;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;

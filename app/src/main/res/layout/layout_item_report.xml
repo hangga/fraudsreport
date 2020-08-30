@@ -8,7 +8,6 @@
     android:layout_marginRight="@dimen/padding_page_normal"
     android:layout_marginTop="@dimen/margin_card_vertical"
     android:layout_marginBottom="@dimen/margin_card_vertical"
-    android:minHeight="64dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <RelativeLayout
@@ -28,10 +27,10 @@
             android:layout_marginTop="@dimen/padding_card_inner_inner"
             android:layout_centerVertical="true"
             android:layout_marginBottom="@dimen/padding_card_inner_inner"
-            tools:src="@mipmap/ic_bank_bg"
+            tools:src="@drawable/ic_phone_18dp"
             android:scaleType="fitCenter"
-            android:layout_width="32dp"
-            android:layout_height="32dp"/>
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
 
         <TextView
             android:id="@+id/txtJenis"
@@ -54,7 +53,7 @@
             android:scaleType="centerInside"
             android:src="@drawable/ic_more_horiz_black_24dp"
             android:background="@drawable/selector_global"
-            android:layout_height="64dp"
+            android:layout_height="38dp"
             android:layout_margin="0dp"
             android:layout_width="40dp"
             tools:text="Stok"
