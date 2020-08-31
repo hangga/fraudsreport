@@ -152,10 +152,16 @@ public class PostReportActivity extends AppCompatActivity {
         });
         btnSubmit.setOnClickListener(view -> {
             if (isValid()) {
+                if (report == null){
+                    report = new Report();
+                    report.setId(0);
+                }
                 report.setNumber(edtNomor.getText().toString().trim());
                 report.setNo_telp(rbPhone.isChecked());
                 report.setNo_rek(rbRek.isChecked());
 
+                if (frauds == null) frauds = new Frauds();
+                frauds.setReportId(report.getId());
                 frauds.setKota_korban(edtKota.getText() != null ? edtKota.getText().toString() : "");
                 frauds.setJenis_penipuan(edtJenis.getText() != null ? edtJenis.getText().toString() : "");
                 frauds.setJumlah_kerugian(edtKerugian.getLongval() != null ? edtKerugian.getLongval().toString() : "");

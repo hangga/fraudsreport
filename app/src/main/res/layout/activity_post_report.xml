@@ -161,7 +161,7 @@
                 android:layout_marginBottom="32dp"
                 android:text="@string/submit"
                 android:textColor="@color/white"
-                android:background="@drawable/selector_button_yellow"
+                android:background="@drawable/selector_button"
                 android:layout_height="46dp"/>
         </LinearLayout>
     </ScrollView>
