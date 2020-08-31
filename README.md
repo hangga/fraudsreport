@@ -2,8 +2,8 @@
 Online fraud reporting.
 
 # Requirement
-* Minimal SDK Version : 16(Jelly Bean)     
-* Target SDK Version 29
+* Minimal SDK Version : API 16(Jelly Bean)     
+* Target/Compile SDK Version : API 29 (Android 10 | Q)
 
 # Compile Option
 * Source Compatibility : Java 8(JavaVersion.VERSION_1_8)     
