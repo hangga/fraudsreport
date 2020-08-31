@@ -23,3 +23,4 @@ For form validation with a beautiful UI display
 
 # screenshot
 ![image](https://github.com/hangga/fraudsreport/blob/master/skrinsut/1.MainPage-Report List.png)
+![image](https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/2.Pagination.png)
