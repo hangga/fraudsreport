@@ -15,6 +15,7 @@ import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.util.Prop;
+import id.web.hangga.frauds.view.SummaryHolder;
 import id.web.hangga.frauds.view.reportlist.OnPrepareToDelete;
 import id.web.hangga.frauds.view.reportlist.ReportViewHolder;
 
@@ -23,19 +24,31 @@ public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private Sumary sumary;
     private Report report;
     private OnPrepareToDelete onPrepareToDelete;
+    private List<Frauds> fraudsList = new ArrayList<>();
+
+    FraudListAdapter() {
+    }
 
     void setOnPrepareToDelete(OnPrepareToDelete onPrepareToDelete) {
         this.onPrepareToDelete = onPrepareToDelete;
+    }
+
+    public void addFrauds(Frauds frauds){
+        this.fraudsList.add(2, frauds);
+
+        Sumary newSummary = new Sumary();
+        newSummary.setTotalKasus(sumary.getTotalKasus() + 1);
+        newSummary.setTotalRugi(sumary.getTotalRugi() + frauds.getJumlah_kerugian());
+        newSummary.setNewRugi(frauds.getJumlah_kerugian());
+        setSumary(newSummary);
+
+        notifyDataSetChanged();
     }
 
     public void setReport(Report report) {
         this.report = report;
         notifyDataSetChanged();
     }
-
-    private List<Frauds> fraudsList = new ArrayList<>();
-
-    FraudListAdapter(){}
 
     void setSumary(Sumary sumary) {
         this.sumary = sumary;
@@ -63,9 +76,9 @@ public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     parent, false);
             return new FraudViewHolder(itemView, report);
         } else if (viewType == Prop.TYPE_SUMMARY) {
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_summary_fraud,
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_summary,
                     parent, false);
-            return new FraudSummaryHolder(itemView);
+            return new SummaryHolder(itemView);
         } else
             return null;
     }
@@ -84,16 +97,15 @@ public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
                 @Override
                 public void onPrepareToDelete(Frauds frauds) {
-                    if (frauds != null){
+                    if (frauds != null) {
                         onPrepareToDelete.onPrepareToDelete(frauds);
                         fraudsList.remove(frauds);
                         notifyDataSetChanged();
                     }
                 }
             });
-        } else if (holder instanceof FraudSummaryHolder) {
-            ((FraudSummaryHolder) holder).bind(sumary.getTotalKasus(),
-                    sumary.getTotalRugi(), sumary.getNewRugi());
+        } else if (holder instanceof SummaryHolder) {
+            ((SummaryHolder) holder).bind(sumary, SummaryHolder.SUMMARY_FRAUDS);
         }
     }
 

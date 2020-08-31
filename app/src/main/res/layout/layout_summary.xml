@@ -16,7 +16,7 @@
         android:background="@color/black_flat"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/txtTotalKasus"
+            android:id="@+id/txtSummaryOne"
             android:gravity="center"
             android:layout_marginLeft="@dimen/padding_page_normal"
             android:layout_marginRight="@dimen/padding_page_normal"
@@ -28,6 +28,7 @@
             android:textSize="@dimen/size_value"
             tools:text="6767-79987-7878"/>
         <TextView
+            android:id="@+id/txtSubOne"
             android:gravity="center"
             android:layout_marginLeft="@dimen/padding_page_normal"
             android:layout_marginRight="@dimen/padding_page_normal"
@@ -47,7 +48,7 @@
             android:background="@color/div_summary"/>
         <TextView
             android:gravity="center"
-            android:id="@+id/txtTotalRugi"
+            android:id="@+id/txtSummaryTwo"
             android:layout_marginLeft="@dimen/padding_page_normal"
             android:layout_marginRight="@dimen/padding_page_normal"
             android:layout_marginTop="@dimen/padding_page_small"
@@ -58,6 +59,7 @@
             android:textSize="@dimen/size_value"
             tools:text="6767-79987-7878"/>
         <TextView
+            android:id="@+id/txtSubTwo"
             android:gravity="center"
             android:layout_marginLeft="@dimen/padding_page_normal"
             android:layout_marginRight="@dimen/padding_page_normal"
@@ -76,7 +78,7 @@
             android:layout_height="1dp"
             android:background="@color/div_summary"/>
         <TextView
-            android:id="@+id/txtNewRugi"
+            android:id="@+id/txtSummaryThree"
             android:gravity="center"
             android:layout_marginLeft="@dimen/padding_page_normal"
             android:layout_marginRight="@dimen/padding_page_normal"
@@ -88,6 +90,7 @@
             android:textSize="@dimen/size_value"
             tools:text="6767-79987-7878"/>
         <TextView
+            android:id="@+id/txtSubThree"
             android:gravity="center"
             android:layout_marginLeft="@dimen/padding_page_normal"
             android:layout_marginRight="@dimen/padding_page_normal"

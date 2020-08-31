@@ -144,7 +144,7 @@ public class ReportsListPresenter {
                                 Report report = reportItems.get(i).toReportparcel();
                                 if (report.isNo_rek()) totalRek++;
                                 if (report.isNo_telp()) totalTelp++;
-                                reports.add(report);
+                                reports.add(1, report);
                             }
                             sumary.setTotalRek(totalRek);
                             sumary.setTotalTelp(totalTelp);

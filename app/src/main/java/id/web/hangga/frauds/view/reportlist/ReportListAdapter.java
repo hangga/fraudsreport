@@ -15,6 +15,7 @@ import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.util.Prop;
+import id.web.hangga.frauds.view.SummaryHolder;
 
 public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -83,8 +84,6 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         newSummary.setTotalRek(report.isNo_rek()? sumary.getTotalRek() + 1:sumary.getTotalRek());
         setSumary(newSummary);
         notifyDataSetChanged();
-
-        notifyDataSetChanged();
     }
 
     void setReportList(List<Report> reportList) {
@@ -103,8 +102,8 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == Prop.TYPE_SUMMARY) {
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_summary_report, parent, false);
-            return new ReportSummaryHoder(itemView);
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_summary, parent, false);
+            return new SummaryHolder(itemView);
         } else if (viewType == Prop.TYPE_PAGINATION){
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_page, parent, false);
             return new PageViewHolder(itemView);
@@ -135,8 +134,8 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
                 }
             });
-        } else if (holder instanceof ReportSummaryHoder) {
-            ((ReportSummaryHoder) holder).bind(sumary.getTotalRek(), sumary.getTotalTelp(), sumary.getTotalKasus());
+        } else if (holder instanceof SummaryHolder) {
+            ((SummaryHolder) holder).bind(sumary, SummaryHolder.SUMMARY_REPORTS);
         } else if (holder instanceof PageViewHolder){
             ((PageViewHolder)holder).bind(getPageCount(), page -> {
                 generatePage(page);

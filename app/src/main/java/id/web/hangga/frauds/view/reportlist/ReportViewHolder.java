@@ -1,7 +1,10 @@
 package id.web.hangga.frauds.view.reportlist;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
@@ -9,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import butterknife.BindView;
@@ -69,5 +73,16 @@ public class ReportViewHolder extends RecyclerView.ViewHolder {
             });
             popupMenu.show();
         });
+        if (report.isNew()) {
+
+            int highlightColor = ContextCompat.getColor(itemView.getContext(), R.color.colorAccent);
+
+            ObjectAnimator highlightNewInsert = ObjectAnimator
+                    .ofInt(itemView, "backgroundColor", highlightColor, Color.WHITE)
+                    .setDuration(5000);
+            highlightNewInsert.setEvaluator(new ArgbEvaluator());
+            highlightNewInsert.start();
+            report.setNew(false);
+        }
     }
 }

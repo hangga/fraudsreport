@@ -16,7 +16,7 @@
         android:background="@color/black_flat"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/txtTotalKasus"
+            android:id="@+id/txtSummaryOne"
             android:gravity="center"
             android:layout_marginLeft="@dimen/padding_page_normal"
             android:layout_marginRight="@dimen/padding_page_normal"

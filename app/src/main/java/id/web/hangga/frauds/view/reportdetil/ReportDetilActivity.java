@@ -164,7 +164,8 @@ FraudsPresenter.View{
 
     @Override
     public void onFraudResult(Frauds frauds) {
-        reportDetilPresenter.getReportDetil(report.getId());
+        frauds.setNew(true);
+        fraudListAdapter.addFrauds(frauds);
     }
 
     @Override

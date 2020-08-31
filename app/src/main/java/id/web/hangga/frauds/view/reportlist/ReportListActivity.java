@@ -104,6 +104,7 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
     @Override
     public void onReportResult(Report report, boolean isNew) {
         if (report != null) {
+            report.setNew(isNew);
             if (isNew) {
                 reportListAdapter.addReport(report);
                 fraudsresult.setReportId(report.getId());

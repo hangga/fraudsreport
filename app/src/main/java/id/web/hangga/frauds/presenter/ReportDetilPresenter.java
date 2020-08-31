@@ -45,15 +45,19 @@ public class ReportDetilPresenter {
                     public void onNext(List<FraudItem> fraudItems) {
                         frauds = new ArrayList<>();
 
+                        //add Summary in index 0
                         Frauds summaryItem = new Frauds();
                         summaryItem.setType(Prop.TYPE_SUMMARY);
                         frauds.add(0, summaryItem);
                         Double totalRugi = 0.0;
                         Double newRugi = 0.0;
 
+                        //add Report item in index 1
                         Frauds reportItem = new Frauds();
                         reportItem.setType(Prop.TYPE_ITEM_REPORT);
                         frauds.add(1, reportItem);
+
+                        //add Frauds start in index 2
                         for (int i = 0; i < fraudItems.size(); i++) {
                             Frauds fraud = fraudItems.get(i).toFraudsParcel();
                             frauds.add(fraud);

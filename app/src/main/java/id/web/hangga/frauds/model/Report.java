@@ -16,14 +16,14 @@ public class Report implements Parcelable {
             return new Report[size];
         }
     };
-    private int id;
     public String createdAt;
     public String upStringdAt;
+    private int id;
     private String number;
     private boolean no_telp = false;
     private boolean no_rek = false;
     private int type;
-
+    private boolean isNew;
     public Report() {
     }
 
@@ -35,6 +35,14 @@ public class Report implements Parcelable {
         this.no_telp = in.readBoolean(); //in.readByte() != 0;
         this.no_rek = in.readBoolean(); //in.readByte() != 0;
         this.type = in.readInt();
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean aNew) {
+        isNew = aNew;
     }
 
     public int getType() {
