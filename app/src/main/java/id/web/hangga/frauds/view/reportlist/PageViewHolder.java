@@ -12,6 +12,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.web.hangga.frauds.R;
+import id.web.hangga.frauds.view.customview.ViewItemPage;
 
 class PageViewHolder extends RecyclerView.ViewHolder {
 

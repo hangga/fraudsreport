@@ -70,6 +70,7 @@ public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             return null;
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ReportViewHolder) {

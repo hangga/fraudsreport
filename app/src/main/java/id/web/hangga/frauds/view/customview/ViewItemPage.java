@@ -1,4 +1,4 @@
-package id.web.hangga.frauds.view.reportlist;
+package id.web.hangga.frauds.view.customview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
