@@ -123,6 +123,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 public void onPrepareToDelete(Report report) {
                     onPrepareToDelete.onPrepareToDelete(report);
                     reportList.remove(report);
+                    reportListPaged.remove(report);
                     Sumary newSummary = new Sumary();
                     newSummary.setTotalKasus(sumary.getTotalKasus() - 1);
                     newSummary.setTotalTelp(report.isNo_telp()?sumary.getTotalTelp() - 1:sumary.getTotalTelp());
