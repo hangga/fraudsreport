@@ -22,4 +22,4 @@ For handle http requests on retroffit
 For form validation with a beautiful UI display
 
 # screenshot
-![image](https://github.com/hangga/fraudsreport/blob/master/skrinsut/1.MainPage-Report%20List.png?raw=true)
+![image](https://github.com/hangga/fraudsreport/blob/master/skrinsut/1.MainPage-Report List.png)
