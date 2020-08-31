@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import id.web.hangga.frauds.R;
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.util.Prop;
+import id.web.hangga.frauds.view.OnPrepareToDelete;
 import id.web.hangga.frauds.view.postreport.PostReportActivity;
 import id.web.hangga.frauds.view.reportdetil.ReportDetilActivity;
 

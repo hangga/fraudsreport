@@ -23,7 +23,7 @@ import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.util.Prop;
 import id.web.hangga.frauds.util.Utils;
 import id.web.hangga.frauds.view.postreport.PostReportActivity;
-import id.web.hangga.frauds.view.reportlist.OnPrepareToDelete;
+import id.web.hangga.frauds.view.OnPrepareToDelete;
 
 class FraudViewHolder extends RecyclerView.ViewHolder {
 
@@ -37,7 +37,7 @@ class FraudViewHolder extends RecyclerView.ViewHolder {
     TextView txtKOta;
     @BindView(R.id.imgMore)
     ImageView imgMore;
-    Report report;
+    private Report report;
 
     FraudViewHolder(@NonNull View itemView, Report report) {
         super(itemView);

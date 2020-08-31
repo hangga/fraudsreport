@@ -1,4 +1,4 @@
-package id.web.hangga.frauds.view.reportlist;
+package id.web.hangga.frauds.view;
 
 import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;

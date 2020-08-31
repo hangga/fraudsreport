@@ -4,16 +4,15 @@ import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.data.remote.ApiInterface;
 import id.web.hangga.frauds.data.remote.RetrofitClient;
 import id.web.hangga.frauds.data.remote.response.FraudItem;
-import id.web.hangga.frauds.util.Utils;
-import id.web.hangga.frauds.view.BaseView;
+import id.web.hangga.frauds.view.BaseViewInterface;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class FraudsPresenter {
-    private View view;
-    SingleObserver<FraudItem> fraudItemSingleObserver = new SingleObserver<FraudItem>() {
+    private ViewInterface view;
+    private SingleObserver<FraudItem> fraudItemSingleObserver = new SingleObserver<FraudItem>() {
         @Override
         public void onSubscribe(Disposable d) {
 
@@ -27,14 +26,13 @@ public class FraudsPresenter {
 
         @Override
         public void onError(Throwable e) {
-            //String httpErr = Utils.getHttpErrorMessage(e);
             view.onError(e.getMessage());
             view.onProgress(false);
         }
     };
     private ApiInterface apiInterface;
 
-    public FraudsPresenter(View view) {
+    public FraudsPresenter(ViewInterface view) {
         this.view = view;
         this.apiInterface = RetrofitClient.getRetrofit().create(ApiInterface.class);
     }
@@ -83,7 +81,7 @@ public class FraudsPresenter {
 
     }
 
-    public interface View extends BaseView {
+    public interface ViewInterface extends BaseViewInterface {
         void onFraudResult(Frauds frauds);
         void onFraudDeleted(Frauds frauds);
     }

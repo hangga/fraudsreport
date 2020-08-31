@@ -32,7 +32,7 @@ public class SummaryHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.txtSubThree)
     TextView txtSubThree;
 
-    DecimalFormat df = new DecimalFormat("#.##");
+    private DecimalFormat df = new DecimalFormat("#.##");
 
     public SummaryHolder(@NonNull View itemView) {
         super(itemView);

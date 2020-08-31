@@ -16,7 +16,7 @@ import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.util.Prop;
 import id.web.hangga.frauds.view.SummaryHolder;
-import id.web.hangga.frauds.view.reportlist.OnPrepareToDelete;
+import id.web.hangga.frauds.view.OnPrepareToDelete;
 import id.web.hangga.frauds.view.reportlist.ReportViewHolder;
 
 public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -33,7 +33,7 @@ public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.onPrepareToDelete = onPrepareToDelete;
     }
 
-    public void addFrauds(Frauds frauds){
+    void addFrauds(Frauds frauds){
         this.fraudsList.add(2, frauds);
 
         Sumary newSummary = new Sumary();

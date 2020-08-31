@@ -5,14 +5,13 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import id.web.hangga.frauds.model.Frauds;
-import id.web.hangga.frauds.model.Report;
-import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.data.remote.ApiInterface;
 import id.web.hangga.frauds.data.remote.RetrofitClient;
 import id.web.hangga.frauds.data.remote.response.ReportItem;
+import id.web.hangga.frauds.model.Report;
+import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.util.Prop;
-import id.web.hangga.frauds.view.BaseView;
+import id.web.hangga.frauds.view.BaseViewInterface;
 import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,18 +20,17 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ReportsListPresenter {
 
-    private View view;
+    private ViewInterface view;
     private ApiInterface apiInterface;
     private List<Report> reports;
-    private List<Frauds> frauds;
     private Sumary sumary;
 
-    public ReportsListPresenter(View view){
+    public ReportsListPresenter(ViewInterface view) {
         this.view = view;
         this.apiInterface = RetrofitClient.getRetrofit().create(ApiInterface.class);
     }
 
-    public void updateReport(Report report){
+    public void updateReport(Report report) {
         view.onProgress(true);
         apiInterface.updateReport(report.getId(), report.getNumber(), report.isNo_telp(), report.isNo_rek())
                 .subscribeOn(Schedulers.io())
@@ -45,7 +43,7 @@ public class ReportsListPresenter {
 
                     @Override
                     public void onSuccess(ReportItem reportItem) {
-                        if (reportItem != null){
+                        if (reportItem != null) {
                             view.onReportResult(reportItem.toReportparcel(), false);
                         }
                         view.onProgress(false);
@@ -59,11 +57,11 @@ public class ReportsListPresenter {
                 });
     }
 
-    public void createReport(Report report){
+    public void createReport(Report report) {
         Log.d(Prop.APP_NAME, "Error create report:createReport() mehod called");
-        Log.d(Prop.APP_NAME, "Error create report:"+report.getNumber());
-        Log.d(Prop.APP_NAME, "Error create report:"+report.isNo_rek());
-        Log.d(Prop.APP_NAME, "Error create report:"+report.isNo_telp());
+        Log.d(Prop.APP_NAME, "Error create report:" + report.getNumber());
+        Log.d(Prop.APP_NAME, "Error create report:" + report.isNo_rek());
+        Log.d(Prop.APP_NAME, "Error create report:" + report.isNo_telp());
         view.onProgress(true);
         apiInterface.newReport(report.getNumber(), report.isNo_telp(), report.isNo_rek())
                 .subscribeOn(Schedulers.io())
@@ -76,7 +74,7 @@ public class ReportsListPresenter {
 
                     @Override
                     public void onSuccess(ReportItem reportItem) {
-                        if (reportItem != null){
+                        if (reportItem != null) {
                             view.onReportResult(reportItem.toReportparcel(), true);
                         }
                         view.onProgress(false);
@@ -90,7 +88,7 @@ public class ReportsListPresenter {
                 });
     }
 
-    public void deleteReport(Report report){
+    public void deleteReport(Report report) {
         view.onProgress(true);
         apiInterface.deleteReport(report.getId())
                 .subscribeOn(Schedulers.io())
@@ -116,7 +114,7 @@ public class ReportsListPresenter {
     }
 
 
-    public void getAllData(){
+    public void getAllData() {
         view.onProgress(true);
         apiInterface.getAllReports()
                 .subscribeOn(Schedulers.io())
@@ -129,7 +127,7 @@ public class ReportsListPresenter {
 
                     @Override
                     public void onNext(List<ReportItem> reportItems) {
-                        if (reportItems.size() == 0){
+                        if (reportItems.size() == 0) {
                             view.onEmpty();
                         } else {
                             reports = new ArrayList<>();
@@ -140,7 +138,7 @@ public class ReportsListPresenter {
                             int totalRek = 0;
                             int totalTelp = 0;
                             sumary = new Sumary();
-                            for (int i = 0; i < reportItems.size(); i++){
+                            for (int i = 0; i < reportItems.size(); i++) {
                                 Report report = reportItems.get(i).toReportparcel();
                                 if (report.isNo_rek()) totalRek++;
                                 if (report.isNo_telp()) totalTelp++;
@@ -167,9 +165,11 @@ public class ReportsListPresenter {
                 });
     }
 
-    public interface View extends BaseView{
+    public interface ViewInterface extends BaseViewInterface {
         void onReportResult(Report report, boolean isNew);
+
         void onReportDeleted(Report report);
+
         void onGetAllDataReport(List<Report> reports, Sumary sumary);
     }
 }

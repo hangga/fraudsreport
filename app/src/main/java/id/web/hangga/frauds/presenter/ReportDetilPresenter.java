@@ -11,7 +11,7 @@ import id.web.hangga.frauds.data.remote.RetrofitClient;
 import id.web.hangga.frauds.data.remote.response.FraudItem;
 import id.web.hangga.frauds.data.remote.response.ReportItem;
 import id.web.hangga.frauds.util.Prop;
-import id.web.hangga.frauds.view.BaseView;
+import id.web.hangga.frauds.view.BaseViewInterface;
 import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -19,13 +19,13 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class ReportDetilPresenter {
-    private View view;
+    private ViewInterface view;
     private ApiInterface apiInterface;
     private List<Frauds> frauds;
 
     private Sumary sumary;
 
-    public ReportDetilPresenter(View view){
+    public ReportDetilPresenter(ViewInterface view){
         this.view = view;
         this.apiInterface = RetrofitClient.getRetrofit().create(ApiInterface.class);
     }
@@ -138,7 +138,7 @@ public class ReportDetilPresenter {
                 });
     }
 
-    public interface View extends BaseView{
+    public interface ViewInterface extends BaseViewInterface {
         void onReportResult(Report report);
         void onReportDeleted(Report report);
         void onReportDetil(List<Frauds> frauds, Sumary sumary);

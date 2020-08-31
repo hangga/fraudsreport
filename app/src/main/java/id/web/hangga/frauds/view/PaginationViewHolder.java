@@ -1,4 +1,4 @@
-package id.web.hangga.frauds.view.reportlist;
+package id.web.hangga.frauds.view;
 
 import android.view.View;
 import android.widget.LinearLayout;
@@ -13,8 +13,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.web.hangga.frauds.R;
 import id.web.hangga.frauds.view.customview.ViewItemPage;
+import id.web.hangga.frauds.view.reportlist.ReportListAdapter;
 
-class PageViewHolder extends RecyclerView.ViewHolder {
+public class PaginationViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.linPaging)
     LinearLayout linPaging;
@@ -22,7 +23,7 @@ class PageViewHolder extends RecyclerView.ViewHolder {
 
     private List<ViewItemPage> itemPageList = new ArrayList<>();
 
-    PageViewHolder(@NonNull View itemView) {
+    public PaginationViewHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         this.view = itemView;
@@ -34,7 +35,7 @@ class PageViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
-    void bind(int pageCount, ReportListAdapter.OnItemPageListener onItemPageListener) {
+    public void bind(int pageCount, ReportListAdapter.OnItemPageListener onItemPageListener) {
         if (linPaging.getChildCount() == 0) {
             for (int i = 0; i < pageCount; i++) {
                 ViewItemPage viewItemPage = new ViewItemPage(view.getContext());

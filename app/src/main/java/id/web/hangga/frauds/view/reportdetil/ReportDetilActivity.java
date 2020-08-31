@@ -27,12 +27,11 @@ import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.presenter.FraudsPresenter;
 import id.web.hangga.frauds.presenter.ReportDetilPresenter;
 import id.web.hangga.frauds.util.Prop;
+import id.web.hangga.frauds.view.OnPrepareToDelete;
 import id.web.hangga.frauds.view.postreport.PostReportActivity;
-import id.web.hangga.frauds.view.reportlist.OnPrepareToDelete;
-import id.web.hangga.frauds.view.reportlist.ReportListActivity;
 
-public class ReportDetilActivity extends AppCompatActivity implements ReportDetilPresenter.View,
-FraudsPresenter.View{
+public class ReportDetilActivity extends AppCompatActivity implements ReportDetilPresenter.ViewInterface,
+        FraudsPresenter.ViewInterface {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -59,7 +58,7 @@ FraudsPresenter.View{
         initaction();
     }
 
-    void initaction(){
+    void initaction() {
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(ReportDetilActivity.this, PostReportActivity.class);
             intent.putExtra(Prop.PARAM_POST_TYPE, Prop.POST_INSERT_FRAUD);
@@ -88,8 +87,7 @@ FraudsPresenter.View{
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(Prop.APP_NAME, "Cek resultCode:resultCode:" + resultCode);
         if (resultCode != RESULT_CANCELED) {
-            //Log.d(Prop.APP_NAME, "Error create report:RESULT_OK");
-            if (requestCode == Prop.POST_INSERT_FRAUD){
+            if (requestCode == Prop.POST_INSERT_FRAUD) {
                 Frauds frauds = data.getParcelableExtra("frauds");
                 frauds.setReportId(report.getId());
                 fraudsPresenter.createFraud(frauds);

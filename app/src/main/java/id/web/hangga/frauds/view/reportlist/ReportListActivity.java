@@ -27,10 +27,11 @@ import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.presenter.FraudsPresenter;
 import id.web.hangga.frauds.presenter.ReportsListPresenter;
 import id.web.hangga.frauds.util.Prop;
+import id.web.hangga.frauds.view.OnPrepareToDelete;
 import id.web.hangga.frauds.view.postreport.PostReportActivity;
 
-public class ReportListActivity extends AppCompatActivity implements ReportsListPresenter.View,
-        FraudsPresenter.View {
+public class ReportListActivity extends AppCompatActivity implements ReportsListPresenter.ViewInterface,
+        FraudsPresenter.ViewInterface {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;

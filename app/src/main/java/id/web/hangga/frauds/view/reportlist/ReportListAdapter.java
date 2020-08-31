@@ -15,6 +15,8 @@ import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.util.Prop;
+import id.web.hangga.frauds.view.OnPrepareToDelete;
+import id.web.hangga.frauds.view.PaginationViewHolder;
 import id.web.hangga.frauds.view.SummaryHolder;
 
 public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -106,7 +108,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             return new SummaryHolder(itemView);
         } else if (viewType == Prop.TYPE_PAGINATION){
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_page, parent, false);
-            return new PageViewHolder(itemView);
+            return new PaginationViewHolder(itemView);
         } else {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_report, parent, false);
             return new ReportViewHolder(itemView);
@@ -136,8 +138,8 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             });
         } else if (holder instanceof SummaryHolder) {
             ((SummaryHolder) holder).bind(sumary, SummaryHolder.SUMMARY_REPORTS);
-        } else if (holder instanceof PageViewHolder){
-            ((PageViewHolder)holder).bind(getPageCount(), page -> {
+        } else if (holder instanceof PaginationViewHolder){
+            ((PaginationViewHolder)holder).bind(getPageCount(), page -> {
                 generatePage(page);
                 notifyDataSetChanged();
             });
