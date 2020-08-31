@@ -27,6 +27,7 @@ public class FraudsPresenter {
         @Override
         public void onError(Throwable e) {
             view.onError(e.getMessage());
+            view.onProgress(false);
         }
     };
     private ApiInterface apiInterface;

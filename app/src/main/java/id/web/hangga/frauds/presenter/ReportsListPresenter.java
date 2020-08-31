@@ -32,26 +32,6 @@ public class ReportsListPresenter {
         this.apiInterface = RetrofitClient.getRetrofit().create(ApiInterface.class);
     }
 
-    /*SingleObserver<ReportItem> reportItemSingleObserver = new SingleObserver<ReportItem>() {
-        @Override
-        public void onSubscribe(Disposable d) {
-
-        }
-
-        @Override
-        public void onSuccess(ReportItem reportItem) {
-            if (reportItem != null){
-                view.onReportResult(reportItem.toReportparcel());
-            }
-            view.onProgress(false);
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            view.onError(e.getMessage());
-        }
-    };*/
-
     public void updateReport(Report report){
         view.onProgress(true);
         apiInterface.updateReport(report.getId(), report.getNumber(), report.isNo_telp(), report.isNo_rek())
@@ -73,7 +53,8 @@ public class ReportsListPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        view.onError(e.getMessage());
+                        view.onProgress(false);
                     }
                 });
     }
@@ -103,7 +84,8 @@ public class ReportsListPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(Prop.APP_NAME, "Error create report:"+e.getMessage());
+                        view.onError(e.getMessage());
+                        view.onProgress(false);
                     }
                 });
     }
@@ -128,6 +110,7 @@ public class ReportsListPresenter {
                     @Override
                     public void onError(Throwable e) {
                         view.onError(e.getMessage());
+                        view.onProgress(false);
                     }
                 });
     }
@@ -168,11 +151,13 @@ public class ReportsListPresenter {
                             sumary.setTotalKasus(reportItems.size());
                             view.onGetAllDataReport(reports, sumary);
                         }
+                        view.onProgress(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         view.onError(e.getMessage());
+                        view.onProgress(false);
                     }
 
                     @Override

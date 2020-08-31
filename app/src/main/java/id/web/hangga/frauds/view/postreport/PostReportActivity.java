@@ -22,7 +22,6 @@ import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.util.Prop;
 import id.web.hangga.frauds.util.Utils;
-import id.web.hangga.frauds.view.customview.MoneyEditText;
 
 public class PostReportActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
@@ -42,7 +41,7 @@ public class PostReportActivity extends AppCompatActivity {
     @BindView(R.id.edtJenis)
     EditText edtJenis;
     @BindView(R.id.edtKerugian)
-    MoneyEditText edtKerugian;
+    EditText edtKerugian;
     @BindView(R.id.edtKota)
     EditText edtKota;
 
@@ -105,11 +104,12 @@ public class PostReportActivity extends AppCompatActivity {
      */
     void uiEditFraud() {
         // get frauds parcelable from data intent
+        report = getIntent().getParcelableExtra("report");
         frauds = getIntent().getParcelableExtra("frauds");
         txtHeader.setText(R.string.update_fraud_header);
         edtKota.setText(frauds.getKota_korban());
         edtJenis.setText(frauds.getJenis_penipuan());
-        edtKerugian.setText(frauds.getJumlah_kerugian().toString());
+        edtKerugian.setText(frauds.getJumlah_kerugian().toString().replace(".", ""));
         rgNumberType.setVisibility(View.GONE);
         txtLabelNomor.setVisibility(View.GONE);
         edtNomor.setVisibility(View.GONE);
@@ -152,7 +152,7 @@ public class PostReportActivity extends AppCompatActivity {
         });
         btnSubmit.setOnClickListener(view -> {
             if (isValid()) {
-                if (report == null){
+                if (report == null) {
                     report = new Report();
                     report.setId(0);
                 }
@@ -164,7 +164,7 @@ public class PostReportActivity extends AppCompatActivity {
                 frauds.setReportId(report.getId());
                 frauds.setKota_korban(edtKota.getText() != null ? edtKota.getText().toString() : "");
                 frauds.setJenis_penipuan(edtJenis.getText() != null ? edtJenis.getText().toString() : "");
-                frauds.setJumlah_kerugian(edtKerugian.getLongval() != null ? edtKerugian.getLongval().toString() : "");
+                frauds.setJumlah_kerugian(edtKerugian.getText() != null ? edtKerugian.getText().toString() : "");
 
                 Intent intent = new Intent();
                 intent.putExtra("report", report);
@@ -177,9 +177,10 @@ public class PostReportActivity extends AppCompatActivity {
 
     /**
      * Validasi form sebelum submit
+     *
      * @return
      */
-    boolean isValid(){
+    boolean isValid() {
         boolean isValid = true;
         for (int i = 0; i < linMain.getChildCount(); i++) {
             View chid = linMain.getChildAt(i);

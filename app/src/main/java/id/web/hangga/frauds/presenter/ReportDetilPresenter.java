@@ -44,6 +44,7 @@ public class ReportDetilPresenter {
                     @Override
                     public void onNext(List<FraudItem> fraudItems) {
                         frauds = new ArrayList<>();
+
                         Frauds summaryItem = new Frauds();
                         summaryItem.setType(Prop.TYPE_SUMMARY);
                         frauds.add(0, summaryItem);
@@ -59,16 +60,19 @@ public class ReportDetilPresenter {
                             totalRugi = totalRugi + fraud.getJumlah_kerugian();
                             newRugi = fraud.getJumlah_kerugian();
                         }
+
                         sumary = new Sumary();
                         sumary.setTotalKasus(fraudItems.size());
                         sumary.setTotalRugi(totalRugi);
                         sumary.setNewRugi(newRugi);
                         view.onReportDetil(frauds, sumary);
+                        view.onProgress(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         view.onError(e.getMessage());
+                        view.onProgress(false);
                     }
 
                     @Override
@@ -98,6 +102,7 @@ public class ReportDetilPresenter {
                     @Override
                     public void onError(Throwable e) {
                         view.onError(e.getMessage());
+                        view.onProgress(false);
                     }
                 });
     }
@@ -123,7 +128,8 @@ public class ReportDetilPresenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        view.onError(e.getMessage());
+                        view.onProgress(false);
                     }
                 });
     }

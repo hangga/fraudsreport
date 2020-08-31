@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.web.hangga.frauds.R;
 import id.web.hangga.frauds.model.Frauds;
+import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.util.Prop;
 import id.web.hangga.frauds.util.Utils;
 import id.web.hangga.frauds.view.postreport.PostReportActivity;
@@ -32,9 +33,11 @@ class FraudViewHolder extends RecyclerView.ViewHolder {
     TextView txtKOta;
     @BindView(R.id.imgMore)
     ImageView imgMore;
+    Report report;
 
-    FraudViewHolder(@NonNull View itemView) {
+    FraudViewHolder(@NonNull View itemView, Report report) {
         super(itemView);
+        this.report = report;
         ButterKnife.bind(this, itemView);
     }
 
@@ -58,6 +61,7 @@ class FraudViewHolder extends RecyclerView.ViewHolder {
                 } else if (menuItem.getItemId() == R.id.menuEdit) {
                     Intent intent = new Intent(view.getContext(), PostReportActivity.class);
                     intent.putExtra(Prop.PARAM_POST_TYPE, Prop.POST_UPDATE_FRAUD);
+                    intent.putExtra("report", report);
                     intent.putExtra("frauds", frauds);
                     ((Activity) view.getContext()).startActivityForResult(intent, Prop.POST_UPDATE_FRAUD);
                 }

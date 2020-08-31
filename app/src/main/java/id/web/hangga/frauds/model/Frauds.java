@@ -64,7 +64,7 @@ public class Frauds extends Report implements Parcelable {
     }
 
     public Double getJumlah_kerugian() {
-        return jumlah_kerugian.length()>0? Double.parseDouble(jumlah_kerugian):0;
+        return jumlah_kerugian.length()>0? Double.parseDouble(jumlah_kerugian.replace(",",".")):0;
     }
 
     public void setJumlah_kerugian(String jumlah_kerugian) {

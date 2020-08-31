@@ -61,7 +61,7 @@ public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         } else if (viewType == Prop.TYPE_ITEM_FRAUD) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_fraud,
                     parent, false);
-            return new FraudViewHolder(itemView);
+            return new FraudViewHolder(itemView, report);
         } else if (viewType == Prop.TYPE_SUMMARY) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_summary_fraud,
                     parent, false);

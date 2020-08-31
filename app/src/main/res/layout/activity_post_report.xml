@@ -116,7 +116,7 @@
                 android:textColor="@color/red_material"
                 style="@style/TextView.InputLabel"
                 />
-            <id.web.hangga.frauds.view.customview.MoneyEditText
+            <EditText
                 android:id="@+id/edtKerugian"
                 android:layout_marginTop="0dp"
                 android:layout_marginLeft="@dimen/padding_page_normal"
