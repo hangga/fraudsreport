@@ -30,7 +30,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     /**
      * Menggenerate item per halaman
      * Please, dont do this on real project
-     * @param page
+     * @param page, int
      */
     private void generatePage(int page){
         reportListPaged = new ArrayList<>();
@@ -41,14 +41,14 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         // add Summary
         reportListPaged.add(reportList.get(0));
 
-        // Add item report paged
+        // Add report
         for (int i = start; i < end; i++){
             try{
                 reportListPaged.add(reportList.get(i));
             }catch (Exception ignored){}
         }
 
-        // Add item view Pagination
+        // Add Pagination
         Report pagination = new Report();
         pagination.setType(Prop.TYPE_PAGINATION);
         reportListPaged.add(pagination);
@@ -56,9 +56,9 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     /**
      * Banyaknya halaman
-     * @return
+     * @return int pageCount
      */
-    int getPageCount(){
+    private int getPageCount(){
         int pageCount = reportList.size() / itemsPerPage;
         return reportList.size() % itemsPerPage > 0? pageCount + 1 : pageCount;
     }
@@ -77,8 +77,14 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     void addReport(Report report){
-        this.reportListPaged.add(1, report); // insert on index 1 a.k.a after summary
-        this.reportList.add(1, report); // insert on index 1 a.k.a after summary
+        /*
+           insert on index
+           0 => Summary
+           1 => Report Item
+           2 => Pagination
+         */
+        this.reportListPaged.add(1, report);
+        this.reportList.add(1, report);
 
         Sumary newSummary = new Sumary();
         newSummary.setTotalKasus(sumary.getTotalKasus() + 1);
@@ -96,7 +102,6 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemViewType(int position) {
-        //return reportList.get(position).getType();
         return reportListPaged.get(position).getType();
     }
 

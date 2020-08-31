@@ -16,14 +16,15 @@ public class Report implements Parcelable {
             return new Report[size];
         }
     };
-    public String createdAt;
-    public String upStringdAt;
+    String createdAt;
+    String upStringdAt;
     private int id;
     private String number;
     private boolean no_telp = false;
     private boolean no_rek = false;
     private int type;
     private boolean isNew;
+
     public Report() {
     }
 

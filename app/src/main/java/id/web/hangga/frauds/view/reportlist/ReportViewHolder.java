@@ -74,8 +74,9 @@ public class ReportViewHolder extends RecyclerView.ViewHolder {
             });
             popupMenu.show();
         });
-        if (report.isNew()) {
 
+        //for highlighting new insert item
+        if (report.isNew()) {
             int highlightColor = ContextCompat.getColor(itemView.getContext(), R.color.colorAccent);
 
             ObjectAnimator highlightNewInsert = ObjectAnimator

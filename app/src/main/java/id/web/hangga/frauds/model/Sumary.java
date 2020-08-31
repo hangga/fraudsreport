@@ -22,10 +22,12 @@ public class Sumary extends Report implements Parcelable {
     private int totalTelp;
     private Double totalRugi;
     private Double newRugi;
+
     public Sumary() {
         this.setType(Prop.TYPE_SUMMARY);
     }
-    protected Sumary(Parcel in) {
+
+    private Sumary(Parcel in) {
         this.totalKasus = in.readInt();
         this.totalRek = in.readInt();
         this.totalTelp = in.readInt();
