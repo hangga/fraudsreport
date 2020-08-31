@@ -1,7 +1,7 @@
 # Frauds Reporting App
 Online fraud reporting.
 ## screenshot
-<img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/1.MainPage-Report%20List.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/2.Pagination.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/Validation.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/Detil%20Report%20-%20Frauds%20List.png" width="320"/>
+<img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/1.MainPage-Report%20List.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/2.Pagination.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/Validation.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/Detil%20Report%20-%20Frauds%20List.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/Pop%20Up%20Menu%20-%20Edit%20-%20Delete.png" width="320"/>
 
 ## Requirement
 * Minimal SDK Version : API 16(Jelly Bean)     
