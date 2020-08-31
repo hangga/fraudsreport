@@ -52,38 +52,61 @@ public class PostReportActivity extends AppCompatActivity {
     TextView txtKerugian;
     @BindView(R.id.txtJenis)
     TextView txtJenis;
+    @BindView(R.id.txtHeader)
+    TextView txtHeader;
 
     @BindView(R.id.btnSubmit)
     Button btnSubmit;
 
     int postType = 0;
-    Report report = new Report();
-    Frauds frauds = new Frauds();
+    Report report;
+    Frauds frauds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_report);
         ButterKnife.bind(this);
-
+        setupactionbar();
         postType = getIntent().getIntExtra(Prop.PARAM_POST_TYPE, 0);
 
         switch (postType) {
-            case Prop.POST_TYPE_UPDATE_REPORT:
+            case Prop.POST_UPDATE_REPORT:
                 uiEditReportMOde();
                 break;
 
-            case Prop.POST_TYPE_UPDATE_FRAUD:
+            case Prop.POST_UPDATE_FRAUD:
                 uiEditFraud();
+                break;
+
+            case Prop.POST_INSERT_FRAUD:
+                uiInsertfraud();
                 break;
         }
 
-        setupactionbar();
+
         initAction();
     }
 
+    /**
+     * Tampilan UI insert Fraud
+     */
+    void uiInsertfraud() {
+        // get report parcelable from data intent
+        report = getIntent().getParcelableExtra("report");
+        txtHeader.setText(getString(R.string.inser_fraud_header) + report.getNumber());
+        rgNumberType.setVisibility(View.GONE);
+        txtLabelNomor.setVisibility(View.GONE);
+        edtNomor.setVisibility(View.GONE);
+    }
+
+    /**
+     * Tampilan UI edit fraud
+     */
     void uiEditFraud() {
+        // get frauds parcelable from data intent
         frauds = getIntent().getParcelableExtra("frauds");
+        txtHeader.setText(R.string.update_fraud_header);
         edtKota.setText(frauds.getKota_korban());
         edtJenis.setText(frauds.getJenis_penipuan());
         edtKerugian.setText(frauds.getJumlah_kerugian().toString());
@@ -92,13 +115,17 @@ public class PostReportActivity extends AppCompatActivity {
         edtNomor.setVisibility(View.GONE);
     }
 
+    /**
+     * Tampilan UI Edit Report
+     */
     void uiEditReportMOde() {
         toolbar.setTitle(R.string.edit_report);
+        // get report parcelable from data intent
         report = getIntent().getParcelableExtra("report");
         edtNomor.setText(report.getNumber());
         rbRek.setChecked(report.isNo_rek());
         rbPhone.setChecked(report.isNo_telp());
-        txtLabelNomor.setText(report.isNo_rek()? getString(R.string.nomor_rek):getString(R.string.nomor_telp));
+        txtLabelNomor.setText(report.isNo_rek() ? getString(R.string.nomor_rek) : getString(R.string.nomor_telp));
         txtJenis.setVisibility(View.GONE);
         edtJenis.setVisibility(View.GONE);
         txtKerugian.setVisibility(View.GONE);
@@ -107,6 +134,9 @@ public class PostReportActivity extends AppCompatActivity {
         edtKota.setVisibility(View.GONE);
     }
 
+    /**
+     * Inisialisasi action2
+     */
     void initAction() {
         rbPhone.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b) {
@@ -120,59 +150,51 @@ public class PostReportActivity extends AppCompatActivity {
                 edtNomor.setHint(R.string.nomor_rek);
             }
         });
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean isValid = true;
-                for (int i = 0; i < linMain.getChildCount(); i++) {
-                    View chid = linMain.getChildAt(i);
-                    if (chid instanceof EditText) {
-                        if (chid.getVisibility() == View.VISIBLE &&
-                                ((EditText) chid).getText().toString().trim().length() == 0) {
-                            isValid = false;
-                            linMain.scrollTo(chid.getScrollX(), 0);
-                            chid.requestFocus();
-                            Utils.showBallon(PostReportActivity.this, chid,
-                                    ((EditText) chid).getHint().toString());
-                            break;
-                        }
-                    }
-                }
+        btnSubmit.setOnClickListener(view -> {
+            if (isValid()) {
+                report.setNumber(edtNomor.getText().toString().trim());
+                report.setNo_telp(rbPhone.isChecked());
+                report.setNo_rek(rbRek.isChecked());
 
-                if (isValid) {
+                frauds.setKota_korban(edtKota.getText() != null ? edtKota.getText().toString() : "");
+                frauds.setJenis_penipuan(edtJenis.getText() != null ? edtJenis.getText().toString() : "");
+                frauds.setJumlah_kerugian(edtKerugian.getLongval() != null ? edtKerugian.getLongval().toString() : "");
 
-                    switch (postType) {
-                        case Prop.POST_TYPE_INSERT_REPORT:
-                            //uiEditReportMOde();
-                            break;
-
-                        case Prop.POST_TYPE_UPDATE_REPORT:
-                            //uiEditReportMOde();
-                            break;
-
-                        case Prop.POST_TYPE_UPDATE_FRAUD:
-                            //uiEditFraud();
-                            break;
-                    }
-
-                    report.setNumber(edtNomor.getText().toString().trim());
-                    report.setNo_telp(rbPhone.isChecked());
-                    report.setNo_rek(rbRek.isChecked());
-
-                    frauds.setKota_korban(edtKota.getText()!=null?edtKota.getText().toString():"");
-                    frauds.setJenis_penipuan(edtJenis.getText() != null? edtJenis.getText().toString():"");
-                    frauds.setJumlah_kerugian(edtKerugian.getLongval() != null? edtKerugian.getLongval().toString() :"");
-
-                    Intent intent = new Intent();
-                    intent.putExtra("report", report);
-                    intent.putExtra("frauds", frauds);
-                    setResult(postType, intent);
-                    finish();
-                }
+                Intent intent = new Intent();
+                intent.putExtra("report", report);
+                intent.putExtra("frauds", frauds);
+                setResult(postType, intent);
+                finish();
             }
         });
     }
 
+    /**
+     * Validasi form sebelum submit
+     * @return
+     */
+    boolean isValid(){
+        boolean isValid = true;
+        for (int i = 0; i < linMain.getChildCount(); i++) {
+            View chid = linMain.getChildAt(i);
+            if (chid instanceof EditText) {
+                if (chid.getVisibility() == View.VISIBLE &&
+                        ((EditText) chid).getText().toString().trim().length() == 0) {
+                    isValid = false;
+                    linMain.scrollTo(chid.getScrollX(), 0);
+                    chid.requestFocus();
+                    Utils.showBallon(PostReportActivity.this, chid,
+                            ((EditText) chid).getHint().toString());
+                    break;
+                }
+            }
+        }
+        return isValid;
+    }
+
+    /**
+     * Konfigurasi actionbar/toolbar
+     */
     void setupactionbar() {
         toolbar.setTitle(R.string.post_report);
         setSupportActionBar(toolbar);

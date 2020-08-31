@@ -12,7 +12,8 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
+    <string name="not_found">Tidak ditemukan</string>
+    <string name="delete_success">Berhasil dihapus..</string>
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="dilaporkan">Dilaporkan pada tanggal : </string>
@@ -22,6 +23,8 @@
     <string name="summary_rugi">Total kerugian sampai dengan saat ini</string>
     <string name="summary_new_rugi">Kerugian terbaru yang dilaporkan pengguna</string>
     <string name="title_activity_report_detil">ReportDetilActivity</string>
+    <string name="update_fraud_header">Ubah Laporan Penipuan</string>
+    <string name="inser_fraud_header">Tambah Laporan Penipuan untuk Nomor\n</string>
 
     <string name="update">Ubah</string>
     <string name="delete">Hapus</string>

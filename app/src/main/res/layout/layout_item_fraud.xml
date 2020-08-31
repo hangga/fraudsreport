@@ -37,6 +37,7 @@
 
         <TextView
             android:id="@+id/txtJenis"
+            android:paddingLeft="3dp"
             android:layout_marginLeft="@dimen/padding_card_inner_inner"
             android:layout_marginTop="@dimen/padding_card_inner_inner"
             android:layout_below="@+id/txtDate"
@@ -49,6 +50,7 @@
 
         <TextView
             android:id="@+id/txtKerugian"
+            android:paddingLeft="3dp"
             android:layout_marginLeft="@dimen/padding_card_inner_inner"
             android:layout_marginTop="@dimen/padding_card_inner_vert"
             android:layout_below="@+id/txtJenis"

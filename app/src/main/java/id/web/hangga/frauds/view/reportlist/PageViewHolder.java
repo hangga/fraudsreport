@@ -38,17 +38,20 @@ class PageViewHolder extends RecyclerView.ViewHolder {
             for (int i = 0; i < pageCount; i++) {
                 ViewItemPage viewItemPage = new ViewItemPage(view.getContext());
                 viewItemPage.getTxtPage().setText(String.valueOf(i + 1));
+
                 if (i == 0) {
                     viewItemPage.setBackgroundResource(R.drawable.circle_yellow);
                 } else {
                     viewItemPage.setBackgroundResource(R.drawable.circle_black);
                 }
+
                 int finali = i;
                 viewItemPage.setOnClickListener(view -> {
                     reset();
                     viewItemPage.setBackgroundResource(R.drawable.circle_yellow);
                     onItemPageListener.onPageListener(finali + 1);
                 });
+
                 itemPageList.add(viewItemPage);
                 linPaging.addView(viewItemPage);
             }

@@ -61,9 +61,9 @@ public class ReportViewHolder extends RecyclerView.ViewHolder {
                             .setNegativeButton(android.R.string.no, null).show();
                 } else if (menuItem.getItemId() == R.id.menuEdit) {
                     Intent intent = new Intent(view.getContext(), PostReportActivity.class);
-                    intent.putExtra(Prop.PARAM_POST_TYPE, Prop.POST_TYPE_UPDATE_REPORT);
+                    intent.putExtra(Prop.PARAM_POST_TYPE, Prop.POST_UPDATE_REPORT);
                     intent.putExtra("report", report);
-                    ((Activity) view.getContext()).startActivityForResult(intent, Prop.POST_TYPE_UPDATE_REPORT);
+                    ((Activity) view.getContext()).startActivityForResult(intent, Prop.POST_UPDATE_REPORT);
                 }
                 return false;
             });

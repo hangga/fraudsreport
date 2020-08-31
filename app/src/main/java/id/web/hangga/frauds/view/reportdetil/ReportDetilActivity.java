@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,7 +27,9 @@ import id.web.hangga.frauds.model.Sumary;
 import id.web.hangga.frauds.presenter.FraudsPresenter;
 import id.web.hangga.frauds.presenter.ReportDetilPresenter;
 import id.web.hangga.frauds.util.Prop;
+import id.web.hangga.frauds.view.postreport.PostReportActivity;
 import id.web.hangga.frauds.view.reportlist.OnPrepareToDelete;
+import id.web.hangga.frauds.view.reportlist.ReportListActivity;
 
 public class ReportDetilActivity extends AppCompatActivity implements ReportDetilPresenter.View,
 FraudsPresenter.View{
@@ -36,6 +40,8 @@ FraudsPresenter.View{
     SwipeRefreshLayout swiperefresh;
     @BindView(R.id.recyclerMain)
     RecyclerView recyclerMain;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
 
     ReportDetilPresenter reportDetilPresenter;
     FraudsPresenter fraudsPresenter;
@@ -47,10 +53,19 @@ FraudsPresenter.View{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_detil);
         report = getIntent().getParcelableExtra("report");
-        Log.d("JAJAL-REPORTID", String.valueOf(report.getId()));
         ButterKnife.bind(this);
         setupactionbar();
         initrecycler();
+        initaction();
+    }
+
+    void initaction(){
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(ReportDetilActivity.this, PostReportActivity.class);
+            intent.putExtra(Prop.PARAM_POST_TYPE, Prop.POST_INSERT_FRAUD);
+            intent.putExtra("report", report);
+            startActivityForResult(intent, Prop.POST_INSERT_FRAUD);
+        });
     }
 
     void setupactionbar() {
@@ -74,10 +89,14 @@ FraudsPresenter.View{
         Log.d(Prop.APP_NAME, "Cek resultCode:resultCode:" + resultCode);
         if (resultCode != RESULT_CANCELED) {
             //Log.d(Prop.APP_NAME, "Error create report:RESULT_OK");
-            if (requestCode == Prop.POST_TYPE_UPDATE_FRAUD) {
+            if (requestCode == Prop.POST_INSERT_FRAUD){
+                Frauds frauds = data.getParcelableExtra("frauds");
+                frauds.setReportId(report.getId());
+                fraudsPresenter.createFraud(frauds);
+            } else if (requestCode == Prop.POST_UPDATE_FRAUD) {
                 Frauds frauds = data.getParcelableExtra("frauds");
                 fraudsPresenter.updateFraud(frauds);
-            }else if (requestCode == Prop.POST_TYPE_UPDATE_REPORT) {
+            } else if (requestCode == Prop.POST_UPDATE_REPORT) {
                 Report report = data.getParcelableExtra("report");
                 reportDetilPresenter.updateReport(report);
             }

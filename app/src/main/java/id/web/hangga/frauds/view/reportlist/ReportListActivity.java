@@ -3,10 +3,7 @@ package id.web.hangga.frauds.view.reportlist;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -63,22 +60,21 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
         fraudsPresenter = new FraudsPresenter(this);
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(ReportListActivity.this, PostReportActivity.class);
-            intent.putExtra(Prop.PARAM_POST_TYPE, Prop.POST_TYPE_INSERT_REPORT);
-            startActivityForResult(intent, Prop.POST_TYPE_INSERT_REPORT);
+            intent.putExtra(Prop.PARAM_POST_TYPE, Prop.POST_INSERT_REPORT);
+            startActivityForResult(intent, Prop.POST_INSERT_REPORT);
         });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d(Prop.APP_NAME, "Cek resultCode:resultCode:" + resultCode);
         if (resultCode != RESULT_CANCELED) {
             Log.d(Prop.APP_NAME, "Error create report:RESULT_OK");
-            if (requestCode == Prop.POST_TYPE_INSERT_REPORT) {
+            if (requestCode == Prop.POST_INSERT_REPORT) {
                 Report report = data.getParcelableExtra("report");
                 fraudsresult = data.getParcelableExtra("frauds");
                 reportsListPresenter.createReport(report);
-            } else if (requestCode == Prop.POST_TYPE_UPDATE_REPORT) {
+            } else if (requestCode == Prop.POST_UPDATE_REPORT) {
                 Report report = data.getParcelableExtra("report");
                 reportsListPresenter.updateReport(report);
             }
@@ -90,9 +86,6 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
         toolbar.setSubtitle(getString(R.string.report_list_subtitle));
         setSupportActionBar(toolbar);
         getSupportActionBar().setIcon(R.mipmap.ic_launcher);
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //toolbar.setNavigationOnClickListener(view -> finish());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(ContextCompat.getColor(ReportListActivity.this,
@@ -101,33 +94,11 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
     }
 
     void initrecycler() {
-        reportListAdapter = new ReportListAdapter();
+        reportListAdapter = new ReportListAdapter(10);
         recyclerMain.setLayoutManager(new LinearLayoutManager(this));
         reportsListPresenter = new ReportsListPresenter(this);
         reportsListPresenter.getAllData();
         swiperefresh.setOnRefreshListener(() -> reportsListPresenter.getAllData());
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar ReportItem clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -136,9 +107,7 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
             if (isNew) {
                 reportListAdapter.addReport(report);
                 fraudsresult.setReportId(report.getId());
-                Log.d(Prop.APP_NAME, "Error create report:" + fraudsresult.getJumlah_kerugian());
-                new Handler().postDelayed(() -> fraudsPresenter.createFraud(fraudsresult), 150);
-
+                fraudsPresenter.createFraud(fraudsresult);
             } else {
                 reportsListPresenter.getAllData();
             }
@@ -147,7 +116,7 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
 
     @Override
     public void onReportDeleted(Report report) {
-        showMessage(report.getNumber() + "berhasil dihapus..");
+        showMessage(report.getNumber() + getString(R.string.delete_success));
     }
 
     @Override
@@ -180,7 +149,7 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
 
     @Override
     public void onEmpty() {
-        showMessage("Tidak ditemukan");
+        showMessage(getString(R.string.not_found));
     }
 
     @Override
@@ -190,11 +159,11 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
 
     @Override
     public void onFraudResult(Frauds frauds) {
-        //do refresh
+        // not implemented in this activity
     }
 
     @Override
     public void onFraudDeleted(Frauds frauds) {
-
+        // not implemented in this activity
     }
 }

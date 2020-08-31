@@ -18,27 +18,22 @@ import id.web.hangga.frauds.util.Prop;
 
 public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int ITEM_PERPAGE = 10;
-
+    private int itemsPerPage;
+    private List<Report> reportListPaged;
     private List<Report> reportList = new ArrayList<>();
     private Sumary sumary;
     private OnPrepareToDelete onPrepareToDelete;
 
-
-    private List<Report> reportListPaged;
-
     /**
      * Menggenerate item per halaman
-     * Pleade, dont do this on real project
+     * Please, dont do this on real project
      * @param page
      */
-    private int selectedPage = 1;
     private void generatePage(int page){
-        selectedPage = page;
         reportListPaged = new ArrayList<>();
 
-        int start = ((page - 1) * ITEM_PERPAGE) + 1;
-        int end = start + ITEM_PERPAGE;
+        int start = ((page - 1) * itemsPerPage) + 1;
+        int end = start + itemsPerPage;
 
         // add Summary
         reportListPaged.add(reportList.get(0));
@@ -47,7 +42,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         for (int i = start; i < end; i++){
             try{
                 reportListPaged.add(reportList.get(i));
-            }catch (Exception e){}
+            }catch (Exception ignored){}
         }
 
         // Add item view Pagination
@@ -61,15 +56,16 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
      * @return
      */
     int getPageCount(){
-        int pageCount = reportList.size() / ITEM_PERPAGE;
-        return reportList.size() % ITEM_PERPAGE > 0? pageCount + 1 : pageCount;
+        int pageCount = reportList.size() / itemsPerPage;
+        return reportList.size() % itemsPerPage > 0? pageCount + 1 : pageCount;
     }
 
     void setOnPrepareToDelete(OnPrepareToDelete onPrepareToDelete) {
         this.onPrepareToDelete = onPrepareToDelete;
     }
 
-    ReportListAdapter() {
+    ReportListAdapter(int itemsPerPage) {
+        this.itemsPerPage = itemsPerPage;
     }
 
     void setSumary(Sumary sumary) {
@@ -106,23 +102,21 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == Prop.TYPE_ITEM_REPORT) {
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_report, parent, false);
-            return new ReportViewHolder(itemView);
-        } else if (viewType == Prop.TYPE_SUMMARY) {
+        if (viewType == Prop.TYPE_SUMMARY) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_summary_report, parent, false);
             return new ReportSummaryHoder(itemView);
         } else if (viewType == Prop.TYPE_PAGINATION){
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_page, parent, false);
             return new PageViewHolder(itemView);
-        } else
-            return null;
+        } else {
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_report, parent, false);
+            return new ReportViewHolder(itemView);
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ReportViewHolder) {
-            //((ReportViewHolder) holder).bind(reportList.get(position), new OnPrepareToDelete() {
             ((ReportViewHolder) holder).bind(reportListPaged.get(position), new OnPrepareToDelete() {
                 @Override
                 public void onPrepareToDelete(Report report) {
@@ -153,7 +147,6 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        //return reportList.size();
         return reportListPaged.size();
     }
 

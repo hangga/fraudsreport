@@ -9,8 +9,9 @@ public class Prop {
     public static final int TYPE_PAGINATION = 3;
 
     // POst
-    public static final int POST_TYPE_INSERT_REPORT = 123;
-    public static final int POST_TYPE_UPDATE_REPORT = 235;
-    public static final int POST_TYPE_UPDATE_FRAUD = 345;
+    public static final int POST_INSERT_REPORT = 123;
+    public static final int POST_UPDATE_REPORT = 235;
+    public static final int POST_UPDATE_FRAUD = 345;
+    public static final int POST_INSERT_FRAUD = 456;
 
 }
