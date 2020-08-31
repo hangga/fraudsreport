@@ -23,6 +23,6 @@ For form validation with a beautiful UI display
 
 # screenshot
 <img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/1.MainPage-Report%20List.png" width="400"/>
-![image](https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/1.MainPage-Report%20List.png)
-![image](https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/2.Pagination.png)
-![image](https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/Detil%20Report%20-%20Frauds%20List.png)
+<img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/1.MainPage-Report%20List.png" width="400"/>
+<img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/2.Pagination.png" width="400"/>
+<img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/Detil%20Report%20-%20Frauds%20List.png" width="400"/>
