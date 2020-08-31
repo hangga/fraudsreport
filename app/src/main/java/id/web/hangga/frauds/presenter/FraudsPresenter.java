@@ -4,6 +4,7 @@ import id.web.hangga.frauds.model.Frauds;
 import id.web.hangga.frauds.data.remote.ApiInterface;
 import id.web.hangga.frauds.data.remote.RetrofitClient;
 import id.web.hangga.frauds.data.remote.response.FraudItem;
+import id.web.hangga.frauds.util.Utils;
 import id.web.hangga.frauds.view.BaseView;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -26,6 +27,7 @@ public class FraudsPresenter {
 
         @Override
         public void onError(Throwable e) {
+            //String httpErr = Utils.getHttpErrorMessage(e);
             view.onError(e.getMessage());
             view.onProgress(false);
         }
