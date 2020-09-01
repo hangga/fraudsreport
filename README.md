@@ -11,8 +11,8 @@ $ git clone https://github.com/hangga/fraudsreport.git
 * Target/Compile SDK Version : API 29 (Android 10 | Q)
 
 ## Compile Option
-* Source Compatibility : Java 8(JavaVersion.VERSION_1_8)     
-* Target Compatibility : Java 8(JavaVersion.VERSION_1_8)   
+* Source Compatibility : Java 8     
+* Target Compatibility : Java 8   
 
 ## Libraries
 * [Butterknife](https://github.com/JakeWharton/butterknife)   
