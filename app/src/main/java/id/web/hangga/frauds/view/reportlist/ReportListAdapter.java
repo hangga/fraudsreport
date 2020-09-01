@@ -1,5 +1,6 @@
 package id.web.hangga.frauds.view.reportlist;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,6 +75,29 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     void setSumary(Sumary sumary) {
         this.sumary = sumary;
         notifyDataSetChanged();
+    }
+
+    void update(Report report){
+        report.setNew(true);
+        boolean isAupdate = false;
+        boolean isBupdate = false;
+        try{
+            for (int i = 0; i < reportList.size(); i++){
+                if (reportList.get(i).getId() == report.getId()){
+                    reportList.set(i, report);
+                    isAupdate = true;
+                }
+
+                if (reportListPaged.get(i).getId() == report.getId()){
+                    reportListPaged.set(i, report);
+                    isBupdate = true;
+                }
+                if (isAupdate && isBupdate) break;
+            }
+            notifyDataSetChanged();
+        }catch (Exception e){
+            Log.e(Prop.APP_NAME, "Cegat:"+e.getMessage());
+        }
     }
 
     void addReport(Report report){

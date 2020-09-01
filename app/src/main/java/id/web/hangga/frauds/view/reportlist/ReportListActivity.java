@@ -111,7 +111,7 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
                 fraudsresult.setReportId(report.getId());
                 fraudsPresenter.createFraud(fraudsresult);
             } else {
-                reportsListPresenter.getAllData();
+                reportListAdapter.update(report);
             }
         }
     }

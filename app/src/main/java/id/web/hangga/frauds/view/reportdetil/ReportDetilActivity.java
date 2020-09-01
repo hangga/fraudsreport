@@ -144,7 +144,7 @@ public class ReportDetilActivity extends AppCompatActivity implements ReportDeti
 
     @Override
     public void onReportResult(Report report) {
-        reportDetilPresenter.getReportDetil(report.getId());
+        //reportDetilPresenter.getReportDetil(report.getId());
     }
 
     @Override
@@ -162,8 +162,7 @@ public class ReportDetilActivity extends AppCompatActivity implements ReportDeti
 
     @Override
     public void onFraudResult(Frauds frauds) {
-        frauds.setNew(true);
-        fraudListAdapter.addFrauds(frauds);
+        fraudListAdapter.update(frauds);
     }
 
     @Override

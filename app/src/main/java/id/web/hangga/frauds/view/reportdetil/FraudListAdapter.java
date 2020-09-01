@@ -33,6 +33,20 @@ public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.onPrepareToDelete = onPrepareToDelete;
     }
 
+    void update(Frauds frauds){
+        frauds.setNew(true);
+        boolean isUpdated = false;
+        for (int i = 0; i < fraudsList.size(); i++){
+            if (fraudsList.get(i).getId() == frauds.getId()){
+                fraudsList.set(i, frauds);
+                isUpdated = true;
+                break;
+            }
+        }
+        if (!isUpdated) addFrauds(frauds);
+        notifyDataSetChanged();
+    }
+
     void addFrauds(Frauds frauds){
         this.fraudsList.add(2, frauds);
 
