@@ -26,4 +26,7 @@ For handle http requests on retroffit
 * [Skydoves Balloon](https://github.com/skydoves/Balloon)   
 For form validation with a beautiful UI display
 
+## UML Diagram
+<img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/doc/diagram.png" width="1000"/>
+
 
