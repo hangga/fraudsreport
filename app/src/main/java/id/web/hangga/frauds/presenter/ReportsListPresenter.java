@@ -18,6 +18,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * Kelas presenter yang menangani logic flow dan request data report
+ */
 public class ReportsListPresenter {
 
     private ViewInterface view;
@@ -30,6 +33,10 @@ public class ReportsListPresenter {
         this.apiInterface = RetrofitClient.getRetrofit().create(ApiInterface.class);
     }
 
+    /**
+     * Untuk mengupdate data report
+     * @param report balikan berupa object report
+     */
     public void updateReport(Report report) {
         view.onProgress(true);
         apiInterface.updateReport(report.getId(), report.getNumber(), report.isNo_telp(), report.isNo_rek())
@@ -57,11 +64,11 @@ public class ReportsListPresenter {
                 });
     }
 
+    /**
+     * Untuk mengreate/menambah report baru
+     * @param report balikan berupa object report
+     */
     public void createReport(Report report) {
-        Log.d(Prop.APP_NAME, "Error create report:createReport() mehod called");
-        Log.d(Prop.APP_NAME, "Error create report:" + report.getNumber());
-        Log.d(Prop.APP_NAME, "Error create report:" + report.isNo_rek());
-        Log.d(Prop.APP_NAME, "Error create report:" + report.isNo_telp());
         view.onProgress(true);
         apiInterface.newReport(report.getNumber(), report.isNo_telp(), report.isNo_rek())
                 .subscribeOn(Schedulers.io())
@@ -88,6 +95,10 @@ public class ReportsListPresenter {
                 });
     }
 
+    /**
+     * Untuk menghapus report
+     * @param report balikan berupa object report
+     */
     public void deleteReport(Report report) {
         view.onProgress(true);
         apiInterface.deleteReport(report.getId())
@@ -114,6 +125,10 @@ public class ReportsListPresenter {
     }
 
 
+    /**
+     * Untuk mendapatkan semua data report
+     * Balikan berupa List<Report>
+     */
     public void getAllData() {
         view.onProgress(true);
         apiInterface.getAllReports()
@@ -165,11 +180,29 @@ public class ReportsListPresenter {
                 });
     }
 
+    /**
+     * Interface ini akan diimplement oleh kelas berupa view/activity/fragment
+     * yang menginject ReportsListPresenter.java
+     */
     public interface ViewInterface extends BaseViewInterface {
+        /**
+         * Interface method yang diimplement ketika presenter berhasil memcreate/update report
+         * @param report balikan berupa object report
+         * @param isNew balikan berupa nilai boolean true(jika berupa data baru/insert) atau false(bukan data baru/update)
+         */
         void onReportResult(Report report, boolean isNew);
 
+        /**
+         * Interface method yang diimplement ketika presenter berhasil menghapus report
+         * @param report balikan berupa object report
+         */
         void onReportDeleted(Report report);
 
+        /**
+         * Interface method yang diimplement ketika presenter berhasil mendapatkan data report
+         * @param reports balikan berupa List report
+         * @param sumary balikan berupa summary
+         */
         void onGetAllDataReport(List<Report> reports, Sumary sumary);
     }
 }

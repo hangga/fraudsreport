@@ -4,6 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 
+/**
+ * Ini adalah kelas implement parcelable dan merupakan konversi dari id/web/hangga/frauds/data/remote/response/ReportItem.java:9
+ * Mengimplement Parcelable agar mudah untuk passing antar kelas, terutama activity
+ */
 public class Report implements Parcelable {
     public static final Parcelable.Creator<Report> CREATOR = new Parcelable.Creator<Report>() {
         @Override

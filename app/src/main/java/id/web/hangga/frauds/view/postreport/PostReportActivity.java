@@ -23,6 +23,11 @@ import id.web.hangga.frauds.model.Report;
 import id.web.hangga.frauds.util.Prop;
 import id.web.hangga.frauds.util.Utils;
 
+/**
+ * Kelas antarmuka pengguna untuk mengirim report/fraud
+ * Kelas ini juga termasuk level view layer yg merupakan kelas end user yang berinteraksi langsung
+ * dengan user
+ */
 public class PostReportActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -100,7 +105,7 @@ public class PostReportActivity extends AppCompatActivity {
     }
 
     /**
-     * Tampilan UI edit fraud
+     * Rendering tampilan UI ketika mode edit fraud
      */
     void uiEditFraud() {
         // get frauds parcelable from data intent
@@ -116,7 +121,7 @@ public class PostReportActivity extends AppCompatActivity {
     }
 
     /**
-     * Tampilan UI Edit Report
+     * Rendering tampilan UI ketika mode Edit Report
      */
     void uiEditReportMOde() {
         toolbar.setTitle(R.string.edit_report);
@@ -135,7 +140,7 @@ public class PostReportActivity extends AppCompatActivity {
     }
 
     /**
-     * Inisialisasi action2
+     * Inisialisasi action-action
      */
     void initAction() {
         rbPhone.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -177,8 +182,7 @@ public class PostReportActivity extends AppCompatActivity {
 
     /**
      * Validasi form sebelum submit
-     *
-     * @return
+     * @return true jika valid, false jika belum valid
      */
     boolean isValid() {
         boolean isValid = true;

@@ -30,6 +30,11 @@ import id.web.hangga.frauds.util.Prop;
 import id.web.hangga.frauds.view.OnPrepareToDelete;
 import id.web.hangga.frauds.view.postreport.PostReportActivity;
 
+/**
+ * Kelas untuk menampilkan data report detil beserta daftar penipuan(fraud list)
+ * Kelas ini juga termasuk level view layer yg merupakan kelas end user yang berinteraksi langsung
+ * dengan user
+ */
 public class ReportDetilActivity extends AppCompatActivity implements ReportDetilPresenter.ViewInterface,
         FraudsPresenter.ViewInterface {
 

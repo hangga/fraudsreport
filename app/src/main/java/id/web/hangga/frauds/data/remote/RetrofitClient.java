@@ -24,6 +24,10 @@ public class RetrofitClient {
                 .build();
     }
 
+    /**
+     * Untuk mendapatkan instance object dari Kelas Retrofit
+     * @return
+     */
     public static Retrofit getRetrofit() {
         if (retrofit == null) {
             retrofit = new retrofit2.Retrofit.Builder()

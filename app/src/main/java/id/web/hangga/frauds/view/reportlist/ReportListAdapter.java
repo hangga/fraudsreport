@@ -56,8 +56,8 @@ public class ReportListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     /**
-     * Banyaknya halaman
-     * @return int pageCount
+     * Untuk mendapatkan jumlah halaman
+     * @return int balikan berupa integer
      */
     private int getPageCount(){
         int pageCount = reportList.size() / itemsPerPage;

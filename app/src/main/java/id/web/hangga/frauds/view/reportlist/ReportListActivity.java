@@ -30,6 +30,11 @@ import id.web.hangga.frauds.util.Prop;
 import id.web.hangga.frauds.view.OnPrepareToDelete;
 import id.web.hangga.frauds.view.postreport.PostReportActivity;
 
+/**
+ * Kelas untuk menampilkan seluruh data report dan merupakan tampilan utama aplikasi
+ * Kelas ini termasuk level view layer yg merupakan kelas end user yang berinteraksi langsung
+ * dengan user
+ */
 public class ReportListActivity extends AppCompatActivity implements ReportsListPresenter.ViewInterface,
         FraudsPresenter.ViewInterface {
 

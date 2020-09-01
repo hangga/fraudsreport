@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import id.web.hangga.frauds.util.Prop;
 
+/**
+ * Kelas ini untuk menangani data summary
+ */
 public class Sumary extends Report implements Parcelable {
     public static final Parcelable.Creator<Sumary> CREATOR = new Parcelable.Creator<Sumary>() {
         @Override

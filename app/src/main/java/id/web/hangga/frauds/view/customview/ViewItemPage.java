@@ -9,6 +9,9 @@ import java.util.Objects;
 
 import id.web.hangga.frauds.R;
 
+/**
+ * Kelas untuk mencetak object item halaman 1,2,3 dst
+ */
 public class ViewItemPage extends RelativeLayout {
 
     private TextView txtPage;

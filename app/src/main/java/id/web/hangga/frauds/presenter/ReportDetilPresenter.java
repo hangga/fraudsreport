@@ -18,6 +18,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * Kelas ini merupakan presenter yang menangani logic flow detil report
+ * Termasuk didalamnya request data report detil dan data fraudlist
+ */
 public class ReportDetilPresenter {
     private ViewInterface view;
     private ApiInterface apiInterface;
@@ -30,6 +34,10 @@ public class ReportDetilPresenter {
         this.apiInterface = RetrofitClient.getRetrofit().create(ApiInterface.class);
     }
 
+    /**
+     * Untuk mendapatkan data Report Detil
+     * @param id report id
+     */
     public void getReportDetil(int id){
         view.onProgress(true);
         apiInterface.getReportDetil(id)
@@ -86,6 +94,10 @@ public class ReportDetilPresenter {
                 });
     }
 
+    /**
+     * Untuk menghapus report
+     * @param report parameter berupa object report
+     */
     public void deleteReport(Report report){
         view.onProgress(true);
         apiInterface.deleteReport(report.getId())
@@ -111,6 +123,10 @@ public class ReportDetilPresenter {
                 });
     }
 
+    /**
+     * Untuk mengupdate report
+     * @param report parameter berupa object report
+     */
     public void updateReport(Report report){
         view.onProgress(true);
         apiInterface.updateReport(report.getId(), report.getNumber(), report.isNo_telp(), report.isNo_rek())
@@ -138,9 +154,29 @@ public class ReportDetilPresenter {
                 });
     }
 
+    /**
+     * Interface ini akan diimplement oleh kelas berupa view/activity/fragment
+     * yang menginject ReportDetilPresenter.java
+     */
     public interface ViewInterface extends BaseViewInterface {
+        /**
+         * Interface method yg dipanggil ketika report berhasil diedit atau di insert
+         * @param report balikan berupa object report
+         */
         void onReportResult(Report report);
+
+        /**
+         * Interface method yg dipanggil ketika report berhasil dihapus
+         * @param report balikan berupa object report
+         */
         void onReportDeleted(Report report);
+
+        /**
+         * Interface method yang diimplement ketika presenter berhasil mendapatkan data report, fraud list
+         * dan menghitung summary.
+         * @param frauds balika berupa List frauds
+         * @param sumary balikan berupa summary
+         */
         void onReportDetil(List<Frauds> frauds, Sumary sumary);
     }
 }

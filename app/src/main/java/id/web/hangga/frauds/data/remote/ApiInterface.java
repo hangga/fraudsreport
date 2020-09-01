@@ -18,25 +18,26 @@ import retrofit2.http.Path;
 public interface ApiInterface {
 
     /**
-     * Get All Report
-     * @return
+     * API Interface method yang diimplement saat retrofit berhasil medapatkan data report
+     * @return balikan berupa List<ReportItem>
      */
     @GET("reports")
     Observable<List<ReportItem>> getAllReports();
 
     /**
-     * get Detil Report and FraudItem list
-     * @param id
-     * @return
+     * API Interface method yang diimplement saat retrofit berhasil medapatkan data Detil Report
+     * dan FraudItem list
+     * @param id parameter berupa report id
+     * @return balikan berupa List<FraudItem>
      */
     @GET("reports/{id}/frauds")
     Observable<List<FraudItem>> getReportDetil(@Path("id") int id);
 
     /**
-     * Create New Report
-     * @param number
-     * @param no_telp
-     * @param no_rek
+     * API Interface method yang diimplement saat retrofit berhasil mengcreate data Report
+     * @param number nomor rekening atau telephon
+     * @param no_telp true jika berupa no telp
+     * @param no_rek true jika berupa no rek
      * @return
      */
     @FormUrlEncoded
@@ -46,12 +47,12 @@ public interface ApiInterface {
                                   @Field("no_rek") boolean no_rek);
 
     /**
-     * Create New FraudItem
-     * @param report_id
-     * @param jenis_penipuan
-     * @param jumlah_kerugian
-     * @param kota_korban
-     * @return
+     * API Interface method yang diimplement saat retrofit berhasil mencreate data Fraud
+     * @param report_id parameter berupa report id
+     * @param jenis_penipuan jenis penipuan
+     * @param jumlah_kerugian jumlah kerugian
+     * @param kota_korban kota korban
+     * @return balikam berupa FraudItem
      */
     @FormUrlEncoded
     @POST("reports/{id}/frauds")
@@ -61,12 +62,12 @@ public interface ApiInterface {
                                  @Field("kota_korban") String kota_korban);
 
     /**
-     * Update data Report
+     * API Interface method yang diimplement saat retrofit berhasil mengupdate data Report
      * @param id
      * @param number
      * @param no_telp
      * @param no_rek
-     * @return
+     * @return  balikan berupa ReportItem
      */
     @FormUrlEncoded
     @PUT("reports/{id}")
@@ -76,13 +77,13 @@ public interface ApiInterface {
                                     @Field("no_rek") boolean no_rek);
 
     /**
-     * Update data FraudItem
+     * API Interface method yang diimplement saat retrofit berhasil mengupdate data Fraud
      * @param report_id
      * @param fraud_id
      * @param jenis_penipuan
      * @param jumlah_kerugian
      * @param kota_korban
-     * @return
+     * @return balikan berupa FraudItem
      */
     @FormUrlEncoded
     @PUT("reports/{report_id}/frauds/{fraud_id}")
@@ -93,18 +94,18 @@ public interface ApiInterface {
                                     @Field("kota_korban") String kota_korban);
 
     /**
-     * Delete report
-     * @param id
-     * @return
+     * API Interface method yang diimplement saat retrofit berhasil menghapus report
+     * @param id parameter berupa report_id
+     * @return balikan berupa ReportItem
      */
     @DELETE("reports/{id}")
     Single<ReportItem> deleteReport(@Path("id") int id);
 
     /**
-     * Delete FraudItem
-     * @param report_id
-     * @param fraud_id
-     * @return
+     * API Interface method yang diimplement saat retrofit berhasil menghapus FraudItem
+     * @param report_id parameter berupa report_id
+     * @param fraud_id parameter berupa fraud_id
+     * @return balikan berupa FraudItem
      */
     @DELETE("reports/{report_id}/frauds/{fraud_id}")
     Single<FraudItem> deleteFrauds(@Path("report_id") int report_id,

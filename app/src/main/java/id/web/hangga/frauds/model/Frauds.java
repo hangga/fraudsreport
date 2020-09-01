@@ -5,6 +5,10 @@ import android.os.Parcelable;
 
 import id.web.hangga.frauds.util.Prop;
 
+/**
+ * Ini adalah kelas implement parcelable dan merupakan konversi dari id/web/hangga/frauds/data/remote/response/FraudItem.java:8
+ * Mengimplement Parcelable agar mudah untuk passing antar kelas, terutama activity
+ */
 public class Frauds extends Report implements Parcelable {
     public static final Parcelable.Creator<Frauds> CREATOR = new Parcelable.Creator<Frauds>() {
         @Override

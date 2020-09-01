@@ -75,7 +75,9 @@ public class ReportViewHolder extends RecyclerView.ViewHolder {
             popupMenu.show();
         });
 
-        //for highlighting new insert item
+        /**
+         * Untuk animasi highlight color ketika insert data baru
+         */
         if (report.isNew()) {
             int highlightColor = ContextCompat.getColor(itemView.getContext(), R.color.colorAccent);
 

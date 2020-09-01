@@ -19,6 +19,10 @@ import id.web.hangga.frauds.view.SummaryHolder;
 import id.web.hangga.frauds.view.OnPrepareToDelete;
 import id.web.hangga.frauds.view.reportlist.ReportViewHolder;
 
+/**
+ * Kelas untuk mengatur tata letak item komponen pada recyclerview
+ * Termasuk kelas level view layer yg merupakan kelas end user yang berinteraksi langsung dengan user
+ */
 public class FraudListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Sumary sumary;

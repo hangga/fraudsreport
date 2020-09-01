@@ -10,6 +10,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * FraudsPresenter.java adalah kelas presenter yang menangani main logic flow
+ * yang berkaitan dengan data fraud
+ */
 public class FraudsPresenter {
     private ViewInterface view;
     private SingleObserver<FraudItem> fraudItemSingleObserver = new SingleObserver<FraudItem>() {
@@ -32,11 +36,19 @@ public class FraudsPresenter {
     };
     private ApiInterface apiInterface;
 
+    /**
+     * Method konstruktor FraudsPresenter
+     * @param view interface yang akan diimplement
+     */
     public FraudsPresenter(ViewInterface view) {
         this.view = view;
         this.apiInterface = RetrofitClient.getRetrofit().create(ApiInterface.class);
     }
 
+    /**
+     * Request Edit data fraud ke API
+     * @param frauds Object frauds
+     */
     public void updateFraud(Frauds frauds) {
         view.onProgress(true);
         apiInterface.updateFrauds(frauds.getReportId(), frauds.getId(), frauds.getJenis_penipuan(), String.valueOf(frauds.getJumlah_kerugian()),
@@ -46,6 +58,10 @@ public class FraudsPresenter {
                 .subscribe(fraudItemSingleObserver);
     }
 
+    /**
+     * Untuk membuat/create/insert frauds baru
+     * @param frauds object frauds
+     */
     public void createFraud(Frauds frauds) {
         view.onProgress(true);
         apiInterface.newFrauds(frauds.getReportId(), frauds.getJenis_penipuan(), String.valueOf(frauds.getJumlah_kerugian()),
@@ -55,6 +71,10 @@ public class FraudsPresenter {
                 .subscribe(fraudItemSingleObserver);
     }
 
+    /**
+     * Untuk menghapus data frauds
+     * @param frauds object frauds
+     */
     public void deleteFraud(Frauds frauds) {
         view.onProgress(true);
         apiInterface.deleteFrauds(frauds.getReportId(), frauds.getId())
@@ -81,8 +101,21 @@ public class FraudsPresenter {
 
     }
 
+    /**
+     * Interface ini akan diimplement oleh kelas berupa view/activity/fragment
+     * yang menginject FraudsPresenter.java
+     */
     public interface ViewInterface extends BaseViewInterface {
+        /**
+         * Interface method yang diimplement ketika presenter berhasil mengcreate/edit frauds
+         * @param frauds balikan berupa object frauds
+         */
         void onFraudResult(Frauds frauds);
+
+        /**
+         * Interface method yang diimplement ketika presenter berhasil menghapus frauds
+         * @param frauds balikan berupa object frauds
+         */
         void onFraudDeleted(Frauds frauds);
     }
 }
