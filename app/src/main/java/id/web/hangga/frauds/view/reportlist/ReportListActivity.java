@@ -85,6 +85,14 @@ public class ReportListActivity extends AppCompatActivity implements ReportsList
                 reportsListPresenter.updateReport(report);
             }
         }
+        try{
+            if (requestCode == Prop.POST_VIEW_DETIL){
+                if (data.getBooleanExtra("isHasUpdate", false)){
+                    reportsListPresenter.getAllData();
+                }
+            }
+        }catch (Exception e){}
+
     }
 
     void setupactionbar() {

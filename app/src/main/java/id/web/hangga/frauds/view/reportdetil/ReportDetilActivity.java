@@ -51,6 +51,7 @@ public class ReportDetilActivity extends AppCompatActivity implements ReportDeti
     FraudsPresenter fraudsPresenter;
     FraudListAdapter fraudListAdapter;
     Report report;
+    boolean isHasUpdate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +80,7 @@ public class ReportDetilActivity extends AppCompatActivity implements ReportDeti
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setNavigationOnClickListener(view -> finish());
+        toolbar.setNavigationOnClickListener(view -> actionFinish());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(ContextCompat.getColor(ReportDetilActivity.this,
@@ -87,11 +88,25 @@ public class ReportDetilActivity extends AppCompatActivity implements ReportDeti
         }
     }
 
+    void actionFinish() {
+        Intent intent = new Intent();
+        intent.putExtra("isHasUpdate", isHasUpdate);
+        setResult(Prop.POST_VIEW_DETIL, intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        actionFinish();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(Prop.APP_NAME, "Cek resultCode:resultCode:" + resultCode);
         if (resultCode != RESULT_CANCELED) {
+            isHasUpdate = true;
             if (requestCode == Prop.POST_INSERT_FRAUD) {
                 Frauds frauds = data.getParcelableExtra("frauds");
                 frauds.setReportId(report.getId());

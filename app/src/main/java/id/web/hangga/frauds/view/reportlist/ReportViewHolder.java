@@ -50,8 +50,9 @@ public class ReportViewHolder extends RecyclerView.ViewHolder {
         view.setOnClickListener(view -> {
             if (view.getContext() instanceof ReportDetilActivity) return;
             Intent intent = new Intent(view.getContext(), ReportDetilActivity.class);
+            intent.putExtra(Prop.PARAM_POST_TYPE, Prop.POST_VIEW_DETIL);
             intent.putExtra("report", report);
-            view.getContext().startActivity(intent);
+            ((Activity)view.getContext()).startActivityForResult(intent, Prop.POST_VIEW_DETIL);
         });
         imgMore.setOnClickListener(view -> {
             PopupMenu popupMenu = new PopupMenu(view.getContext(), imgMore);

@@ -13,5 +13,6 @@ public class Prop {
     public static final int POST_UPDATE_REPORT = 235;
     public static final int POST_UPDATE_FRAUD = 345;
     public static final int POST_INSERT_FRAUD = 456;
+    public static final int POST_VIEW_DETIL = 567;
 
 }
