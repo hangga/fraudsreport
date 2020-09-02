@@ -149,7 +149,8 @@ public class ReportDetilActivity extends AppCompatActivity implements ReportDeti
 
     @Override
     public void onReportResult(Report report) {
-        //reportDetilPresenter.getReportDetil(report.getId());
+        report.setNew(true);
+        fraudListAdapter.setReport(report);
     }
 
     @Override

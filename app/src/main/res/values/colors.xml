@@ -10,6 +10,7 @@
     <color name="brownisgrey">#636363</color>
     <color name="red_subtitle">#F36152</color>
     <color name="red_material">#e44549</color>
+    <color name="new_highlight">#BBFF79</color>
 
     <color name="button_normal">#FC544B</color>
     <color name="button_pressed">#FB160A</color>

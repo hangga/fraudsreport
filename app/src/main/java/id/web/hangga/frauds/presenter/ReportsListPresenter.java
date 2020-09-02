@@ -38,7 +38,7 @@ public class ReportsListPresenter {
      * @param report balikan berupa object report
      */
     public void updateReport(Report report) {
-        view.onProgress(true);
+        //view.onProgress(true);
         apiInterface.updateReport(report.getId(), report.getNumber(), report.isNo_telp(), report.isNo_rek())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -53,13 +53,13 @@ public class ReportsListPresenter {
                         if (reportItem != null) {
                             view.onReportResult(reportItem.toReportparcel(), false);
                         }
-                        view.onProgress(false);
+                        //view.onProgress(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         view.onError(e.getMessage());
-                        view.onProgress(false);
+                        //view.onProgress(false);
                     }
                 });
     }

@@ -79,7 +79,7 @@ public class ReportViewHolder extends RecyclerView.ViewHolder {
          * Untuk animasi highlight color ketika insert data baru
          */
         if (report.isNew()) {
-            int highlightColor = ContextCompat.getColor(itemView.getContext(), R.color.colorAccent);
+            int highlightColor = ContextCompat.getColor(itemView.getContext(), R.color.new_highlight);
 
             ObjectAnimator highlightNewInsert = ObjectAnimator
                     .ofInt(itemView, "backgroundColor", highlightColor, Color.WHITE)

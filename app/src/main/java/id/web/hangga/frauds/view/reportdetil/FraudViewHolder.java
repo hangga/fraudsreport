@@ -74,7 +74,7 @@ class FraudViewHolder extends RecyclerView.ViewHolder {
             popupMenu.show();
         });
         if (frauds.isNew()){
-            int highlightColor = ContextCompat.getColor(itemView.getContext(), R.color.colorAccent);
+            int highlightColor = ContextCompat.getColor(itemView.getContext(), R.color.new_highlight);
 
             ObjectAnimator highlightNewInsert = ObjectAnimator
                     .ofInt(itemView, "backgroundColor", highlightColor, Color.WHITE)

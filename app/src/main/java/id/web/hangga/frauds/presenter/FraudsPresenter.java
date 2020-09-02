@@ -50,7 +50,7 @@ public class FraudsPresenter {
      * @param frauds Object frauds
      */
     public void updateFraud(Frauds frauds) {
-        view.onProgress(true);
+        //view.onProgress(true);
         apiInterface.updateFrauds(frauds.getReportId(), frauds.getId(), frauds.getJenis_penipuan(), String.valueOf(frauds.getJumlah_kerugian()),
                 frauds.getKota_korban())
                 .subscribeOn(Schedulers.io())
