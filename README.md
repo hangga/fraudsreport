@@ -1,7 +1,9 @@
 # Frauds Reporting App
 Online Fraud Reporting App.
+## Apk
+* [download apk](https://github.com/hangga/fraudsreport/raw/master/apk/release/app-release.apk)
 ## Screenshot
-<img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/1.MainPage-Report%20List.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/2.Pagination.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/Validation.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/Detil%20Report%20-%20Frauds%20List.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/Pop%20Up%20Menu%20-%20Edit%20-%20Delete.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/New%20Report%20dan%20Frauds.png" width="320"/>
+<img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/icon.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/1.MainPage-Report%20List.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/2.Pagination.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/Validation.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/Detil%20Report%20-%20Frauds%20List.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/Pop%20Up%20Menu%20-%20Edit%20-%20Delete.png" width="320"/><img src="https://raw.githubusercontent.com/hangga/fraudsreport/master/skrinsut/New%20Report%20dan%20Frauds.png" width="320"/>
 ## Cloning
 ```
 $ git clone https://github.com/hangga/fraudsreport.git
